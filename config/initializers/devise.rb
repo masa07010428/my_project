@@ -23,7 +23,7 @@ Devise.setup do |config|
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
-  config.mailer_sender = 'Fire Fighting Equipment <noreply@example.com>'
+  config.mailer_sender = Settings.smtp[:user_name]
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'

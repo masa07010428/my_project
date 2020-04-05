@@ -35,24 +35,16 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  if Rails.application.credentials.gmail.present?
-    mail_address = Rails.application.credentials.gmail[:address]
-    password = Rails.application.credentials.gmail[:password]
-  else
-    mail_address = 'admin@example.com'
-    password = 'password'
-  end
-
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.smtp_settings = {
-      enable_starttls_auto: true,
-      address: "smtp.gmail.com",
-      port: 587,
-      user_name: mail_address,
-      password: password,
-      authentication: "plain"
+      :enable_starttls_auto => true,
+      :address => Settings.smtp[:address],
+      :port => 587,
+      :domain => Settings.smtp[:domain],
+      :user_name => Settings.smtp[:user_name],
+      :password => Settings.smtp[:password],
+      :authentication => "login"
   }
 
   # Print deprecation notices to the Rails logger.
