@@ -30,3 +30,65 @@
 .alert-alert {
   @extend .alert-danger;
 }
+
+// header部分
+.header{
+  border-top:10px solid rgb(0, 0, 0);
+}
+.logo{
+  margin:0.5em auto;
+  display:block;
+}
+
+.logo-position {
+  margin: 0 auto;
+}
+
+// headerNav部分
+.headerNavBtn{
+    text-align:center;
+    height:3em;
+    line-height:3em;
+    color:#5F5F5F;
+    font-size: 20px;
+    width: 50%;
+    // text-decoration: none;
+}
+
+.headerNavBtn:hover{
+    background:#EEE;
+    text-decoration: none;
+}
+
+// 中央section部分
+.section{
+    background: #232829;
+    background: -moz-linear-gradient(50% 0% -90deg, #000 0%, #232829 100%);
+    background: -o-linear-gradient(-90deg, #000 0%, #232829 100%);
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0, #000), color-stop(1, #232829));
+    background: -webkit-linear-gradient(-90deg, #000 0%, #232829 100%);
+    background: linear-gradient(180deg, #000 0%, #232829 100%);
+    padding: 2em 0 3em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff000000,endColorstr=#ff232829,GradientType=0)";
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff000000,endColorstr=#ff232829,GradientType=0);
+}
+.mainVisual_wrapper .container{
+    padding:0;
+}
+.mainVisual_wrapper.section{
+    padding:0;
+    text-align: center;
+}
+.col_box{
+    background:#FFF;
+    border-radius:3px;
+    padding:15px 0 15px;
+    margin-bottom:1em;
+}
+
+
+.copyright{
+    text-align:center;
+    margin:0.5em auto;
+    display:block;
+}
