@@ -4,4 +4,10 @@ class HomesController < ApplicationController
 
   def about
   end
+
+  def introduce
+  end
+
+  def search
+  end
 end
