@@ -22,16 +22,27 @@
     <%# </div> %>
   <%# </nav> %>
 <%# </header> %> 
-
-<div class="header">
+<header class="sticky-top">
+  <div class="header">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 logo-position">
-              <%= link_to image_tag("logo2.png"), '/', class: 'logo' %>
+              <%= link_to image_tag("logo2.png"), "/", class: 'logo' %>
             </div>
         </div>
     </div>
-</div>
+  </div>
+  <div class="headerNav">
+    <div class="container">
+      <div class="row headerNavBox">
+        <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "About", homes_about_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "User", "/", class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "Log in", new_user_session_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+      </div>
+    </div>
+  </div>
+</header>
 
 
 

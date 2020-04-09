@@ -13,25 +13,11 @@
  *
  */
 
-// ログイン画面
-
-.container-login {
-  @extend .container-fluid;
-  max-width: 576px;
-  padding: 2rem;
-}
-
-// 「ログインしました」などのフラッシュ用スタイル
-
-.alert-notice {
-  @extend .alert-info;
-}
-
-.alert-alert {
-  @extend .alert-danger;
-}
-
+// 全体
 // header部分
+header {
+  background-color: white;
+}
 .header{
   border-top:10px solid rgb(177, 173, 173);
 }
@@ -44,12 +30,11 @@
   margin: 0 auto;
 }
 
-// headerNav部分
 .headerNavBtn{
-    text-align:center;
-    height:3em;
-    line-height:3em;
-    color:#5F5F5F;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+    color: #5F5F5F;
     font-size: 20px;
     width: 50%;
 }
@@ -109,8 +94,35 @@ width:100%;
 }
 
 
+// footer部分
+footer {
+  margin-top: 0.5em;
+}
 .copyright{
     text-align:center;
     margin:0.5em auto;
     display:block;
+}
+
+
+// ログイン画面
+
+.login-wrapper {
+  margin: 50px 50px 0 50px;
+}
+
+.container-login {
+  @extend .container-fluid;
+  max-width: 576px;
+  padding: 2rem;
+}
+
+// 「ログインしました」などのフラッシュ用スタイル
+
+.alert-notice {
+  @extend .alert-info;
+}
+
+.alert-alert {
+  @extend .alert-danger;
 }
