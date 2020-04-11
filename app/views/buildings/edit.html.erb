@@ -1,0 +1,7 @@
+<%= form_for @building, url: "/buildings/#{@building.id}", html: { method: :patch } do |f| %>
+  <p>情報入力</p>
+  <p>名称 <%= f.text_field :name %></p>
+  <p>住所 <%= f.text_field :address %></p>
+
+  <%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
+<% end %>

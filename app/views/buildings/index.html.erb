@@ -1,0 +1,9 @@
+<%= link_to "登録画面へ", "/buildings/new" %>
+<% @buildings.each do |building| %>
+  <p>
+    <%= building.name %>
+    <%= building.address %>
+    <%= link_to "編集", "/buildings/#{building.id}/edit", method: :get %>
+    <%= link_to "削除", "/buildings/#{building.id}", method: :delete, data: { confirm: "削除しますか？" } %>
+  </p>
+<% end %>

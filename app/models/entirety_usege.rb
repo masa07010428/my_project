@@ -1,0 +1,2 @@
+class EntiretyUsege < ApplicationRecord
+end

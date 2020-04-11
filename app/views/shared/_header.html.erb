@@ -38,7 +38,7 @@
       <% if user_signed_in? %>
         <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
         <%= link_to "About", homes_about_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
-        <%= link_to "Building", "/", class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "Building", buildings_new_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
         <%= link_to "Log out", destroy_user_session_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
       <% else %>  
         <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
