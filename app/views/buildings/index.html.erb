@@ -3,6 +3,13 @@
   <p>
     <%= building.name %>
     <%= building.address %>
+    <%= building.entirety_usege %>
+    <%= building.entirety_floor %>
+    <%= building.basement_floor %>
+    <%= building.total_area %>
+    <%= building.total_capacity %>
+    <%= building.fire_use %>
+
     <%= link_to "編集", "/buildings/#{building.id}/edit", method: :get %>
     <%= link_to "削除", "/buildings/#{building.id}", method: :delete, data: { confirm: "削除しますか？" } %>
   </p>
