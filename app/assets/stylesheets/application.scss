@@ -141,3 +141,13 @@ footer {
 .alert-alert {
   @extend .alert-danger;
 }
+
+// 新規登録部分
+.sign_up_wrapper {
+  margin: 50px 50px 0 50px;
+}
+
+// アカウント確認部分
+.confirmation_wrapper {
+  margin: 50px 50px 0 50px;
+}

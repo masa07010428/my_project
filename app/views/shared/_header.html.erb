@@ -35,10 +35,17 @@
   <div class="headerNav">
     <div class="container">
       <div class="row headerNavBox">
+      <% if user_signed_in? %>
         <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
         <%= link_to "About", homes_about_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
-        <%= link_to "User", "/", class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "Building", "/", class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "Log out", destroy_user_session_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+      <% else %>  
+        <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "About", homes_about_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+        <%= link_to "Introduce", homes_introduce_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
         <%= link_to "Log in", new_user_session_path, class: "col-xs-6 col-sm-3 headerNavBtn"%>
+      <% end %>
       </div>
     </div>
   </div>
