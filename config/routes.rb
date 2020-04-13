@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/homes/about', to: 'homes#about'
   get '/homes/introduce', to: 'homes#introduce'
   get '/homes/search', to: 'homes#search'
+  get '/homes/item', to: 'homes#item'
 
   # 建物情報登録画面へ
   get '/buildings/new', to: 'buildings#new'

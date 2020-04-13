@@ -151,3 +151,16 @@ footer {
 .confirmation_wrapper {
   margin: 50px 50px 0 50px;
 }
+
+// introduceページ
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  margin: auto;
+  pointer-events: none;
+}
+.modal-content {
+  pointer-events: all;
+}
