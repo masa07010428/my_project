@@ -8,6 +8,7 @@ class BuildingsController < ApplicationController
   def new
     @building = Building.new
     @entirety_useges = EntiretyUsege.all
+    
   end
 
   # 新規建物登録アクション
