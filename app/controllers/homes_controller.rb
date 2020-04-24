@@ -6,7 +6,7 @@ class HomesController < ApplicationController
   end
 
   def introduce
-    @modals = Modal.all
+    @equipments = Equipment.all
   end
 
   def search

@@ -18,5 +18,8 @@ Rails.application.routes.draw do
   patch '/buildings/:id', to: 'buildings#update'
   # 建物情報削除
   delete '/buildings/:id', to: 'buildings#destroy'
+  # 必要な消防用設備
+  get '/buildings/:id/search', to: 'buildings#search'
+  
 
 end

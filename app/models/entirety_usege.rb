@@ -1,3 +1,9 @@
 class EntiretyUsege < ApplicationRecord
-belongs_to :building
+  has_many :buildings
+
+  def view_category_and_example
+    self.category + "(" + self.example + ")"
+  end
+  
+  
 end
