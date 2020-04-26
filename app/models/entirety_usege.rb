@@ -4,6 +4,4 @@ class EntiretyUsege < ApplicationRecord
   def view_category_and_example
     self.category + "(" + self.example + ")"
   end
-  
-  
 end
