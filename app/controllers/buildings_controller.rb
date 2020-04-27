@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController
-  before_action :set_up_building, only: [:edit, :update, :destroy]
+  before_action :set_up_building, only: [:edit, :update, :destroy, :search]
   before_action :set_up_form, only: [:new, :edit]
   # 一覧画面に対するアクション
   def index
@@ -36,8 +36,10 @@ class BuildingsController < ApplicationController
 
   # 必要な消防用設備等について確認する
   def search
-    # 「TODO:application_helper.rbに消防用設備等の必要不要のロジックを記載するために建物情報を受け取る」
+    # application_helper.rbに消防用設備等の必要不要のロジックを記載する
   end
+  
+  
 
   private
   # 共通化(建物情報取得)

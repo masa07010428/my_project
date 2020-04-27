@@ -10,3 +10,4 @@ Rails.application.routes.draw do
   # 必要な消防用設備
   get '/buildings/:id/search', to: 'buildings#search', as: 'buildings_search'
 end
+

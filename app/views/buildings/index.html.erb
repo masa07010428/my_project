@@ -8,7 +8,7 @@
       <% end %>
     </tr>
     <tr>
-      <th>住所</th>
+      <th >住所</th>
       <% @buildings.each do |building| %>
         <td align="center"><%= building.address %></td>
       <% end %>
@@ -50,14 +50,14 @@
       <% end %>
     </tr>
     <tr>
-      <th>消防用設備等</th>
+      <th>編集/削除</th>
       <% @buildings.each do |building| %>
         <td align="center">
         <%= link_to "確認", buildings_search_path(building), method: :get, class: "btn-gradient-radius-mini" %>
       <% end %>
     </tr>
     <tr>
-      <th>編集/削除</th>
+      <th>消防用設備等</th>
       <% @buildings.each do |building| %>
         <td align="center">
         <%= link_to "編集", edit_building_path(building), class: "btn-gradient-radius-mini" %>
