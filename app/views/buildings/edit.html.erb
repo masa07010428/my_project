@@ -1,4 +1,4 @@
-<%= form_for @building, url: buildings_update_path(@building), html: { method: :patch } do |f| %>
+<%= form_with model: @building, url: building_path(@building), local: true do |f| %>
 <h1>建物情報編集</h1>
   <div class="form-group">
     <%= f.label :name, "名称", class:"col-sm-3 control-label" %>

@@ -1,4 +1,4 @@
-<%= link_to "登録画面へ", buildings_new_path %>
+<%= link_to "登録画面へ", new_building_path %>
 <div class="table-responsive-md">
   <table class="table table-striped text-nowrap">
     <tr>
@@ -60,8 +60,8 @@
       <th>編集/削除</th>
       <% @buildings.each do |building| %>
         <td align="center">
-        <%= link_to "編集", buildings_edit_path(building), method: :get, class: "btn-gradient-radius-mini" %>
-        <%= link_to "削除", buildings_destroy_path(building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius-mini"%>
+        <%= link_to "編集", edit_building_path(building), class: "btn-gradient-radius-mini" %>
+        <%= link_to "削除", building_path(building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius-mini"%>
         </td>
       <% end %> 
     </tr>

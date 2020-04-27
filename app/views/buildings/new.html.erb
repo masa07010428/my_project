@@ -1,6 +1,6 @@
-<%= link_to "一覧画面へ", buildings_index_path %>
+<%= link_to "一覧画面へ", buildings_path %>
 <h1>建物情報入力</h1>
-<%= form_for @building, url: buildings_create_path, html: { method: :post } do |f| %>
+<%= form_with model: @building, url: buildings_path, local: true do |f| %>
   <div class="form-group">
     <%= f.label :name, "名称", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">

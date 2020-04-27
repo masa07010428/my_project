@@ -20,6 +20,10 @@ class BuildingsController < ApplicationController
   def edit
   end
 
+  # 建物情報詳細アクション
+  def show
+  end
+  
   # 建物情報更新アクション
   def update
     @building.update(building_params)
