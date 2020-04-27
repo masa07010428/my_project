@@ -6,11 +6,9 @@ class HomesController < ApplicationController
   end
 
   def introduce
+    @equipments = Equipment.all
   end
 
   def search
-  end
-
-  def item
   end
 end

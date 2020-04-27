@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_094440) do
+ActiveRecord::Schema.define(version: 2020_04_24_093718) do
 
   create_table "buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.text "address"
-    t.integer "entirety_usege"
+    t.integer "entirety_usege_id"
     t.integer "entirety_floor"
-    t.integer "basement_floor"
+    t.string "basement_floor"
     t.integer "total_area"
     t.integer "total_capacity"
     t.integer "windowless_floor"
-    t.integer "fire_use"
+    t.string "fire_use"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,7 +30,15 @@ ActiveRecord::Schema.define(version: 2020_04_11_094440) do
   create_table "entirety_useges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
+    t.text "example"
+  end
+
+  create_table "equipment", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item"
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

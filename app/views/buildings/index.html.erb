@@ -1,16 +1,69 @@
-<%= link_to "登録画面へ", "/buildings/new" %>
-<% @buildings.each do |building| %>
-  <p>
-    <%= building.name %>
-    <%= building.address %>
-    <%= building.entirety_usege %>
-    <%= building.entirety_floor %>
-    <%= building.basement_floor %>
-    <%= building.total_area %>
-    <%= building.total_capacity %>
-    <%= building.fire_use %>
-
-    <%= link_to "編集", "/buildings/#{building.id}/edit", method: :get %>
-    <%= link_to "削除", "/buildings/#{building.id}", method: :delete, data: { confirm: "削除しますか？" } %>
-  </p>
-<% end %>
+<%= link_to "登録画面へ", new_building_path %>
+<div class="table-responsive-md">
+  <table class="table table-striped text-nowrap">
+    <tr>
+      <th>名称</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.name %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>住所</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.address %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>全体用途</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.entirety_usege.category %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>階数（階）</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.entirety_floor %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>地階の有無</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.basement_floor %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>延べ床面積（㎡）</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.total_area %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>総収容人員（人）</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.total_capacity %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>火気使用の有無</th>
+      <% @buildings.each do |building| %>
+        <td align="center"><%= building.fire_use %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>消防用設備等</th>
+      <% @buildings.each do |building| %>
+        <td align="center">
+        <%= link_to "確認", buildings_search_path(building), method: :get, class: "btn-gradient-radius-mini" %>
+      <% end %>
+    </tr>
+    <tr>
+      <th>編集/削除</th>
+      <% @buildings.each do |building| %>
+        <td align="center">
+        <%= link_to "編集", edit_building_path(building), class: "btn-gradient-radius-mini" %>
+        <%= link_to "削除", building_path(building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius-mini"%>
+        </td>
+      <% end %> 
+    </tr>
+  </table>
+</div>

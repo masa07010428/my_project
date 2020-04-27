@@ -88,7 +88,7 @@ width:100%;
 .btn-gradient-radius {
   display: inline-block;
   padding: 7px 20px;
-  border-radius: 25px;
+  border-radius: 10px;
   text-decoration: none;
   color: #FFF;
   background-image: linear-gradient(45deg, #E3E3E3 0%, #5D6873 100%);
@@ -96,7 +96,23 @@ width:100%;
 }
 
 .btn-gradient-radius:hover {
+  background-image: linear-gradient(45deg, #E3E3E3 0%, rgb(138, 146, 155) 100%);
+  text-decoration: none;
+}
+
+.btn-gradient-radius-mini{
+  font-size: 13px;
+  display: inline-block;
+  padding: 3px 5px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #FFF;
   background-image: linear-gradient(45deg, #E3E3E3 0%, #5D6873 100%);
+  transition: .4s;
+}
+
+.btn-gradient-radius-mini:hover {
+  background-image: linear-gradient(45deg, #E3E3E3 0%, rgb(138, 146, 155) 100%);
   text-decoration: none;
 }
 
@@ -106,8 +122,8 @@ width:100%;
     border-radius:3px;
     padding:15px 0 15px;
     margin-bottom:1em;
+    border-radius: 10px;
 }
-
 
 // footer部分
 footer {
@@ -153,14 +169,32 @@ footer {
 }
 
 // introduceページ
-.modal-dialog {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100%;
-  margin: auto;
-  pointer-events: none;
+.content {
+  margin: 0 auto;
+  padding: 40px;
 }
-.modal-content {
-  pointer-events: all;
+
+.modal {
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.modal_bg{
+  background: rgba(0,0,0,0.5);
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+}
+.modal_content{
+  background: #fff;
+  left: 50%;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 60%;
+  border-radius: 10px;
 }

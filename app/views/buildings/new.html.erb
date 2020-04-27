@@ -1,46 +1,74 @@
-
+<%= link_to "一覧画面へ", buildings_path %>
 <h1>建物情報入力</h1>
-<%= form_for @building, url: "/buildings", html: { method: :post } do |f| %>
+<%= form_with model: @building, url: buildings_path, local: true do |f| %>
   <div class="form-group">
-    <%= f.label :name, "名称" %>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+    <%= f.label :name, "名称", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "建物名称を入力してください" %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :address, "住所" %>
-    <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control' %>
+    <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "建物の住所を入力してください"%>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :entirety_usege, "全体用途" %>
-    <%= f.collection_select :entirety_usege, @entirety_useges, :id, :item, {prompt: "選択してください"} %>
+    <%= f.label :entirety_usege_id, "全体用途", class:"col-sm-3 control-label"  %>
+    <div class="col-sm-8">
+      <%= f.collection_select :entirety_usege_id, @entirety_useges, :id, :view_category_and_example, {prompt: "選択してください"} %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :entirety_floor, "階数" %>
-    <%= f.select :entirety_floor, [["1階",1],["2階",2],["3階",3],["4階",4],["5階",5],["6階",6],["7階",7],["8階",8],["9階",9],["10階",10],["11階",11],["12階",12],["13階",13],["14階",14],["15階",15],["16階",16],["17階",17],["18階",18],["19階",19],["20階",20]], {prompt: "選択してください"} %>
+    <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.select :entirety_floor, @entirety_floors, {prompt: "選択してください"} %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :basement_floor, "地階の有無" %>
-    <%= f.select :basement_floor, [["有",1],["無",2]], {prompt: "選択してください"} %>
+    <label class="col-sm-3 control-label">地階の有無</label>
+    <div class="col-sm-8">
+      <%= f.radio_button :basement_floor, :有 %>
+      <%= f.label :有, class: "col-sm-3 control-label" %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.radio_button :basement_floor, :無, checked: "checked" %>
+      <%= f.label :無, class: "col-sm-3 control-label" %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :total_area, "延べ床面積" %>
-    <%= f.text_field :total_area, autofocus: true, class: 'form-control' %>
+    <%= f.label :total_area, "延べ床面積（㎡）", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :total_area, autofocus: true, type: 'tel', class: 'form-control' %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :total_capacity, "総収容人員" %>
-    <%= f.text_field :total_capacity, autofocus: true, class: 'form-control' %>
+    <%= f.label :total_capacity, "総収容人員（人）", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :total_capacity, autofocus: true, class: 'form-control' %>
+    </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :fire_use, "火気使用の有無" %>
-    <%= f.select :fire_use, [["有",1],["無",2]], {prompt: "選択してください"} %>
+    <label class="col-sm-3 control-label">火気使用の有無</label>
+    <div class="col-sm-8">
+      <%= f.radio_button :fire_use, :有 %>
+      <%= f.label :有, class: "col-sm-3 control-label" %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.radio_button :fire_use, :無, checked: "checked" %>
+      <%= f.label :無, class: "col-sm-3 control-label" %>
+    </div>
   </div>
 
-<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="col-sm-8">
+    <%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
+  </div>
 <% end %>
