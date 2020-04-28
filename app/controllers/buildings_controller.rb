@@ -37,10 +37,9 @@ class BuildingsController < ApplicationController
   # 必要な消防用設備等について確認する
   def search
     # application_helper.rbに消防用設備等の必要不要のロジックを記載する
+    @equipments = Equipment.pluck(:item)
   end
   
-  
-
   private
   # 共通化(建物情報取得)
   def set_up_building
