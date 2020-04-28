@@ -96,6 +96,6 @@ end
 
 Equipment.seed do |s|
   s.id = 17
-  s.item = "誘導灯及び誘導標識"
+  s.item = "誘導灯"
   s.introduction = "sample sample sample sample sample sample"
 end
