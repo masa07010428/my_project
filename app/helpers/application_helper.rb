@@ -34,7 +34,7 @@ module ApplicationHelper
   # 消防法施行令第21条
   def automatic_fire_alarm_equipment
     # 消防法施行令第21条第1項第1号イ
-    afae = if usege_in?(@building,[6, 10, 12, 13, 14, 16, 29, 36])
+    if usege_in?(@building,[6, 10, 12, 13, 14, 16, 29, 36])
       "#{@equipments[10]}が必要です（#{law(article: 21, paragraph: 1, item: 1, number: "イ")}）"
 
     # 消防法施行令第21条第1項第1号ロ  
