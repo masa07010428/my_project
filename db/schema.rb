@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_093718) do
+ActiveRecord::Schema.define(version: 2020_05_01_043445) do
 
   create_table "buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_093718) do
     t.string "basement_floor"
     t.integer "total_area"
     t.integer "total_capacity"
-    t.integer "windowless_floor"
     t.string "fire_use"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,6 +40,27 @@ ActiveRecord::Schema.define(version: 2020_04_24_093718) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "information_by_basement_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "building_id"
+    t.string "floor_number"
+    t.string "floor_usege"
+    t.integer "floor_area"
+    t.integer "floor_capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "information_by_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "building_id"
+    t.integer "floor_number"
+    t.string "floor_usege"
+    t.integer "floor_area"
+    t.integer "floor_capacity"
+    t.integer "windowless_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,6 +75,12 @@ ActiveRecord::Schema.define(version: 2020_04_24_093718) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "windowlesses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "judgement"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  building_id: 1
+  floor_number: 1
+  floor_usege: MyString
+  floor_area: 1
+  floor_capacity: 1
+  windowless_judgement: 1
+
+two:
+  building_id: 1
+  floor_number: 1
+  floor_usege: MyString
+  floor_area: 1
+  floor_capacity: 1
+  windowless_judgement: 1

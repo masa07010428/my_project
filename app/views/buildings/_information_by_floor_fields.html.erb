@@ -1,0 +1,9 @@
+<div class="nested-fields">
+  <%= f.select :floor_number, @entirety_floors, {prompt: "階の選択"} %>
+  <%= f.collection_select :floor_usege, @entirety_useges, :id, :category, {prompt: "用途の選択"} %>
+  <%= f.text_field :floor_area, autofocus: true, type: 'tel', class: 'col-sm-2 d-inline form-control', placeholder: "階の床面積" %>
+  <%= f.text_field :floor_capacity, autofocus: true, type: 'tel', class: 'col-sm-2 d-inline form-control', placeholder: "階の収容人員" %>
+  <%= f.collection_select :windowless_id, @windowlesses, :id, :judgement, {prompt: "無窓階判定"} %>
+  <%= f.hidden_field :building_id, value: @building.id %>
+  <%= link_to_remove_association "削除", f %>
+</div>
