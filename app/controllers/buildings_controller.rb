@@ -52,7 +52,7 @@ class BuildingsController < ApplicationController
     @entirety_useges = EntiretyUsege.order(:id)
     @entirety_floors = 20.times.map { |n| ["#{n+1}階", n+1] }
     @entirety_basement_floors = 3.times.map { |n| ["B#{n+1}階", n+1] } << "なし"
-    @windowlesses = Windowless.all
+    @windowlesses = Windowless.order(:id)
   end
 
   # strong parameter
