@@ -6,7 +6,7 @@ class HomesController < ApplicationController
   end
 
   def introduce
-    @equipments = Equipment.all
+    @equipments = Equipment.order(:id)
   end
 
   def search

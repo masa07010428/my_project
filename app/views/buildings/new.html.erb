@@ -23,25 +23,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
-    <div class="col-sm-8">
-      <%= f.select :entirety_floor, @entirety_floors, {prompt: "選択してください"} %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="col-sm-3 control-label">地階の有無</label>
-    <div class="col-sm-8">
-      <%= f.radio_button :basement_floor, :有 %>
-      <%= f.label :有, class: "col-sm-3 control-label" %>
-    </div>
-    <div class="col-sm-8">
-      <%= f.radio_button :basement_floor, :無, checked: "checked" %>
-      <%= f.label :無, class: "col-sm-3 control-label" %>
-    </div>
-  </div>
-
-  <div class="form-group">
     <%= f.label :total_area, "延べ床面積（㎡）", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.text_field :total_area, autofocus: true, type: 'tel', class: 'form-control' %>
@@ -54,7 +35,43 @@
       <%= f.text_field :total_capacity, autofocus: true, class: 'form-control' %>
     </div>
   </div>
+
+  <div class="form-group">
+    <%= f.label :basement_floor, "地階", class: "col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.select :basement_floor, @entirety_basement_floors, {prompt: "選択してください"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="buildings col-sm-8">
+      <%= f.fields_for :information_by_basement_floors do |i| %>
+        <%= render "information_by_basement_floor_fields", f: i %>
+      <% end %>
+      <div class="links" id="basement_floor">
+        <%= link_to_add_association '＋階情報を追加', f, :information_by_basement_floors %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.select :entirety_floor, @entirety_floors, {prompt: "選択してください"} %>
+    </div>
+  </div>
   
+  <div class="form-group">
+    <div class="buildings col-sm-8">
+      <%= f.fields_for :information_by_floors do |i| %>
+        <%= render "information_by_floor_fields", f: i %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association '＋階情報を追加', f, :information_by_floors %>
+      </div>
+    </div>
+  </div>
+
   <div class="form-group">
     <label class="col-sm-3 control-label">火気使用の有無</label>
     <div class="col-sm-8">
@@ -68,7 +85,7 @@
   </div>
 
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <div class="col-sm-8">
+  <div class="col-sm-8 actions">
     <%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
   </div>
 <% end %>
