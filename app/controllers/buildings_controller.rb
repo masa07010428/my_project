@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :set_up_building, only: [:edit, :update, :destroy, :search]
-  before_action :set_up_form, only: [:new, :edit]
+  before_action :set_up_form, only: [:new, :create, :edit]
   # 一覧画面に対するアクション
   def index
     @buildings = Building.where(user_id: current_user.id).order(:id)
@@ -14,7 +14,12 @@ class BuildingsController < ApplicationController
 
   # 新規建物登録アクション
   def create
-    @building = Building.create(building_params)
+    @building = Building.new(building_params)
+    if @building.save
+      redirect_to buildings_path
+    else
+      render :new
+    end
   end
 
   # 建物情報編集アクション

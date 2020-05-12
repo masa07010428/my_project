@@ -1,0 +1,27 @@
+ja:
+  activerecord:
+    models:
+      building: "建物"
+      information_by_floor: "階別情報"
+    attributes:
+      building:
+        name: 建物名称
+        address: 住所
+        entirety_usege_id: 全体用途
+        entirety_floor: 階数
+        basement_floor: 地階
+        total_area: 延べ床面積
+        total_capacity: 総収容人員 
+        fire_use: 火気使用の有無
+      information_by_floors:
+        floor_number: 階数
+        floor_usege: 階別用途
+        floor_area: 階別床面積
+        floor_capacity: 階別収容人員
+        windowless_id: 無窓階判定
+        windowless: 無窓階判定
+      information_by_basement_floors:
+        floor_number: 階数
+        floor_usege: 階別用途
+        floor_area: 階別床面積
+        floor_capacity: 階別収容人員

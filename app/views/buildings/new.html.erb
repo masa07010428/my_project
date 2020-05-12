@@ -5,6 +5,9 @@
     <%= f.label :name, "名称", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "建物名称を入力してください" %>
+      <% if @building.errors.include?(:name) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:name).first %></p>
+      <% end %>
     </div>
   </div>
 
@@ -12,6 +15,9 @@
     <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "建物の住所を入力してください"%>
+      <% if @building.errors.include?(:address) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:address).first %></p>
+      <% end %>
     </div>
   </div>
 
@@ -19,20 +25,29 @@
     <%= f.label :entirety_usege_id, "全体用途", class:"col-sm-3 control-label"  %>
     <div class="col-sm-8">
       <%= f.collection_select :entirety_usege_id, @entirety_useges, :id, :view_category_and_example, {prompt: "選択してください"} %>
+      <% if @building.errors.include?(:entirety_usege_id) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:entirety_usege_id).first %></p>
+      <% end %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :total_area, "延べ床面積（㎡）", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :total_area, autofocus: true, type: 'tel', class: 'form-control' %>
+      <%= f.text_field :total_area, autofocus: true, type: 'tel', placeholder: "半角数字で入力してください", class: 'form-control' %>
+      <% if @building.errors.include?(:total_area) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:total_area).first %></p>
+      <% end %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :total_capacity, "総収容人員（人）", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :total_capacity, autofocus: true, class: 'form-control' %>
+      <%= f.text_field :total_capacity, autofocus: true, placeholder: "半角数字で入力してください", class: 'form-control' %>
+      <% if @building.errors.include?(:total_capacity) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:total_capacity).first %></p>
+      <% end %>
     </div>
   </div>
 
@@ -40,6 +55,9 @@
     <%= f.label :basement_floor, "地階", class: "col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.select :basement_floor, @entirety_basement_floors, {prompt: "選択してください"} %>
+      <% if @building.errors.include?(:basement_floor) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:basement_floor).first %></p>
+      <% end %>
     </div>
   </div>
 
@@ -58,6 +76,9 @@
     <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.select :entirety_floor, @entirety_floors, {prompt: "選択してください"} %>
+      <% if @building.errors.include?(:entirety_floor) %>
+        <p class="error_message"><%= @building.errors.full_messages_for(:entirety_floor).first %></p>
+      <% end %>
     </div>
   </div>
   
