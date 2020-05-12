@@ -20,5 +20,9 @@ module FireFightingEquipment
     config.i18n.default_locale = :ja
     # タイムゾーン変更
     config.time_zone = 'Asia/Tokyo'
+    # エラーメッセージの日本語化
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    # エラーメッセージ表示時のレイアウト崩れ防止
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end
