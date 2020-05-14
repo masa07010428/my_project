@@ -6,4 +6,9 @@
   <%= f.collection_select :windowless_id, @windowlesses, :id, :judgement, {prompt: "無窓階判定"} %>
   <%= f.hidden_field :building_id, value: @building.id %>
   <%= link_to_remove_association "削除", f %>
+  <div class="error_message">
+    <% @information_by_floor_errors.each do |i| %>
+      <p><%= @building.errors.full_messages_for(i).first %></p>
+    <% end %>
+  </div>
 </div>

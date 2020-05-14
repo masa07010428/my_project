@@ -5,4 +5,9 @@
   <%= f.text_field :floor_capacity, autofocus: true, type: 'tel', class: 'col-sm-2 d-inline form-control', placeholder: "階の収容人員" %>
   <%= f.hidden_field :building_id, value: @building.id %>
   <%= link_to_remove_association "削除", f %>
+  <div class="error_message">
+    <% @information_by_basement_floor_errors.each do |i| %>
+      <p><%= @building.errors.full_messages_for(i).first %></p>
+    <% end %>
+  </div>
 </div>
