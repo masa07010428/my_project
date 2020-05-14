@@ -32,7 +32,7 @@ class Building < ApplicationRecord
   end
 
   def basement_floor_matches_last_basement_floor_number
-    if (!information_by_basement_floors.blank?) && (basement_floor != information_by_basement_floors.last.floor_number)
+    if (information_by_basement_floors.present?) && (basement_floor != information_by_basement_floors.last.floor_number)
       errors.add(:basement_floor, "と階別情報の最後に選択した階数を一致させてください")
     end
   end

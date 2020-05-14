@@ -63,12 +63,14 @@ class BuildingsController < ApplicationController
       :"information_by_floors.floor_usege",
       :"information_by_floors.floor_area",
       :"information_by_floors.floor_capacity",
-      :"information_by_floors.windowless_id"]
+      :"information_by_floors.windowless_id"
+    ]
     @information_by_basement_floor_errors = [
       :"information_by_basement_floors.floor_number",
       :"information_by_basement_floors.floor_usege",
       :"information_by_basement_floors.floor_area",
-      :"information_by_basement_floors.floor_capacity"]
+      :"information_by_basement_floors.floor_capacity"
+    ]
   end
 
   # strong parameter
