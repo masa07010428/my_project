@@ -58,6 +58,19 @@ class BuildingsController < ApplicationController
     @entirety_floors = 20.times.map { |n| ["#{n+1}階", n+1] }
     @entirety_basement_floors = 3.times.map { |n| ["B#{n+1}階", n+1] } << "なし"
     @windowlesses = Windowless.order(:id)
+    @information_by_floor_errors = [
+      :"information_by_floors.floor_number",
+      :"information_by_floors.floor_usege",
+      :"information_by_floors.floor_area",
+      :"information_by_floors.floor_capacity",
+      :"information_by_floors.windowless_id"
+    ]
+    @information_by_basement_floor_errors = [
+      :"information_by_basement_floors.floor_number",
+      :"information_by_basement_floors.floor_usege",
+      :"information_by_basement_floors.floor_area",
+      :"information_by_basement_floors.floor_capacity"
+    ]
   end
 
   # strong parameter
