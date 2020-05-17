@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController
-  before_action :set_up_building, only: [:edit, :update, :destroy, :search]
+  before_action :set_up_building, only: [:show, :edit, :update, :destroy, :search]
   before_action :set_up_form, only: [:new, :create, :edit]
   # 一覧画面に対するアクション
   def index
@@ -60,14 +60,14 @@ class BuildingsController < ApplicationController
     @windowlesses = Windowless.order(:id)
     @information_by_floor_errors = [
       :"information_by_floors.floor_number",
-      :"information_by_floors.floor_usege",
+      :"information_by_floors.entirety_usege_id",
       :"information_by_floors.floor_area",
       :"information_by_floors.floor_capacity",
       :"information_by_floors.windowless_id"
     ]
     @information_by_basement_floor_errors = [
       :"information_by_basement_floors.floor_number",
-      :"information_by_basement_floors.floor_usege",
+      :"information_by_basement_floors.entirety_usege_id",
       :"information_by_basement_floors.floor_area",
       :"information_by_basement_floors.floor_capacity"
     ]
@@ -75,6 +75,6 @@ class BuildingsController < ApplicationController
 
   # strong parameter
   def building_params
-    params.require(:building).permit(:user_id, :name, :address, :entirety_usege_id, :entirety_floor, :basement_floor, :total_area, :total_capacity, :fire_use, information_by_floors_attributes:[:floor_number, :floor_usege, :floor_area, :floor_capacity, :windowless_id, :_destroy], information_by_basement_floors_attributes:[:floor_number, :floor_usege, :floor_area, :floor_capacity, :_destroy])
+    params.require(:building).permit(:user_id, :id, :name, :address, :entirety_usege_id, :entirety_floor, :basement_floor, :total_area, :total_capacity, :fire_use, information_by_floors_attributes:[:id, :building_id, :floor_number, :entirety_usege_id, :floor_area, :floor_capacity, :windowless_id, :_destroy], information_by_basement_floors_attributes:[:id, :building_id, :floor_number, :entirety_usege_id, :floor_area, :floor_capacity, :_destroy])
   end
 end
