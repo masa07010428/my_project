@@ -26,7 +26,7 @@ class Building < ApplicationRecord
   end
 
   def when_basement_floor_selected
-    if (basement_floor == 1 || 2 || 3) && (information_by_basement_floors.blank?)
+    if (basement_floor == ( 1 || 2 || 3)) && (information_by_basement_floors.blank?)
       errors.add(:basement_floor, "を選択した場合は、階情報を入力してください")
     end
   end

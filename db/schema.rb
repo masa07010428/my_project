@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_043445) do
+ActiveRecord::Schema.define(version: 2020_05_16_041957) do
 
   create_table "buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -40,10 +40,17 @@ ActiveRecord::Schema.define(version: 2020_05_01_043445) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "equipments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "item"
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "information_by_basement_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "building_id"
     t.string "floor_number"
-    t.string "floor_usege"
+    t.string "entirety_usege_id"
     t.integer "floor_area"
     t.integer "floor_capacity"
     t.datetime "created_at", null: false
@@ -53,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_043445) do
   create_table "information_by_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "building_id"
     t.integer "floor_number"
-    t.string "floor_usege"
+    t.string "entirety_usege_id"
     t.integer "floor_area"
     t.integer "floor_capacity"
     t.integer "windowless_id"

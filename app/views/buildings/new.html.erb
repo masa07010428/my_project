@@ -42,7 +42,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :total_capacity, "総収容人員（人）", class:"col-sm-3 control-label" %>
+    <%= f.label :total_capacity, "総収容人員(人)", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.text_field :total_capacity, autofocus: true, placeholder: "半角数字で入力してください", class: 'form-control' %>
       <% if @building.errors.include?(:total_capacity) %>
