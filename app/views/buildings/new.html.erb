@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'buildings.js' %>
 <%= link_to "一覧画面へ", buildings_path %>
 <h1>建物情報入力</h1>
 <%= form_with model: @building, url: buildings_path, local: true do |f| %>

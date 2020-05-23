@@ -1,5 +1,9 @@
 {
   "name": "fire_fighting_equipment",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^0.18.2",
+    "prettier": "^2.0.5"
+  }
 }

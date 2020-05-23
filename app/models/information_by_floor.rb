@@ -6,7 +6,7 @@ class InformationByFloor < ApplicationRecord
   validates :windowless_id, presence: { message: "を選択してください" }
   validates_associated :building
 
-  belongs_to :building
+  belongs_to :building, optional: :true
   belongs_to :windowless
   belongs_to :entirety_usege, optional: :true
 end

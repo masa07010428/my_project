@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :set_up_building, only: [:show, :edit, :update, :destroy, :search]
-  before_action :set_up_form, only: [:new, :create, :edit]
+  before_action :set_up_form, only: [:new, :create, :edit, :update]
   # 一覧画面に対するアクション
   def index
     @buildings = Building.where(user_id: current_user.id).order(:id)
@@ -32,7 +32,11 @@ class BuildingsController < ApplicationController
   
   # 建物情報更新アクション
   def update
-    @building.update(building_params)
+    if @building.update(building_params)
+      redirect_to building_path
+    else
+      render :edit
+    end
   end
 
   # 削除するためのアクション
@@ -50,6 +54,7 @@ class BuildingsController < ApplicationController
   # 共通化(建物情報取得)
   def set_up_building
     @building = Building.find(params[:id])
+    @information_by_floors = @building.information_by_floors
   end
 
   # 共通化(formのセレクト部分)

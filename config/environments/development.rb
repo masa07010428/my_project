@@ -38,13 +38,13 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :enable_starttls_auto => true,
-      :address => Settings.smtp[:address],
-      :port => 587,
-      :domain => Settings.smtp[:domain],
-      :user_name => Settings.smtp[:user_name],
-      :password => Settings.smtp[:password],
-      :authentication => "login"
+    enable_starttls_auto: true,
+    address: Settings.smtp[:address],
+    port: 587,
+    domain: Settings.smtp[:domain],
+    user_name: Settings.smtp[:user_name],
+    password: Settings.smtp[:password],
+    authentication: 'login'
   }
 
   # Print deprecation notices to the Rails logger.
@@ -70,4 +70,6 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.assets.precompile += %w[*.js]
 end
