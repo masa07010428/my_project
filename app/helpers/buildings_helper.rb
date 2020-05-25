@@ -24,7 +24,7 @@ module BuildingsHelper
     # 消防法施行令第10条第1項第4号は少量危険物のためなし
     
     # 消防法施行令第10条第1項第5号
-    elsif ((@building.basement_floor.include?("1"||"2"||"3")) && (@building.information_by_basement_floors.where(floor_area: 50..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 50..Float::INFINITY).present?) || ((@building.entirety_floor >= 3) && (@building.information_by_floors.where(floor_area: 50..Float::INFINITY).present?))
+    elsif ((@building.basement_floor == "1"||"2"||"3") && (@building.information_by_basement_floors.where(floor_area: 50..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 50..Float::INFINITY).present?) || ((@building.entirety_floor >= 3) && (@building.information_by_floors.where(floor_area: 50..Float::INFINITY).present?))
       "#{@equipments[0]}が必要です（#{law(article: 10, paragraph: 1, item: 5, number: nil)}）"
 
     else
