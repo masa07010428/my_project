@@ -16,8 +16,10 @@ class BuildingsController < ApplicationController
   def create
     @building = Building.new(building_params)
     if @building.save
+      flash[:success] = "新規登録しました"
       redirect_to buildings_path
     else
+      flash.now[:alert] = "登録に失敗しました"
       render :new
     end
   end
@@ -33,8 +35,10 @@ class BuildingsController < ApplicationController
   # 建物情報更新アクション
   def update
     if @building.update(building_params)
+      flash[:success] = "更新しました"
       redirect_to building_path
     else
+      flash.now[:alert] = "更新に失敗しました"
       render :edit
     end
   end
@@ -42,6 +46,8 @@ class BuildingsController < ApplicationController
   # 削除するためのアクション
   def destroy
     @building.delete
+    flash[:success] = "削除しました"
+    redirect_to buildings_path
   end
 
   # 必要な消防用設備等について確認する

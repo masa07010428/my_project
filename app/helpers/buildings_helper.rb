@@ -24,7 +24,7 @@ module BuildingsHelper
     # 消防法施行令第10条第1項第4号は少量危険物のためなし
     
     # 消防法施行令第10条第1項第5号
-    elsif ((@building.basement_floor == "1"||"2"||"3") && (@building.information_by_basement_floors.where(floor_area: 50..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 50..Float::INFINITY).present?) || ((@building.entirety_floor >= 3) && (@building.information_by_floors.where(floor_area: 50..Float::INFINITY).present?))
+    elsif ((@building.basement_floor.include?("1"||"2"||"3")) && (@building.information_by_basement_floors.where(floor_area: 50..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 50..Float::INFINITY).present?) || ((@building.entirety_floor >= 3) && (@building.information_by_floors.where(floor_area: 50..Float::INFINITY).present?))
       "#{@equipments[0]}が必要です（#{law(article: 10, paragraph: 1, item: 5, number: nil)}）"
 
     else
@@ -79,7 +79,7 @@ module BuildingsHelper
       "6項ハ(入居または宿泊なし)の部分には#{@equipments[10]}が必要です（#{law(article: 21, paragraph: 1, item: 9, number: "ロ")}）"
 
     # 消防法施行令第21条第1項第10号
-    elsif (usege_in?(@building,[3, 4, 5, 7, 8]) && (((@building.basement_floor == "1"||"2"||"3") && (@building.information_by_basement_floors.where(floor_area: 100..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 100..Float::INFINITY).present?))) || (usege_in?(@building,[32]) && ((@building.information_by_basement_floors.where(entirety_usege:[3, 4, 5, 6, 7, 8],floor_area: 100..Float::INFINITY).present?) || (@building.information_by_floors.where(entirety_usege:[3, 4, 5, 6, 7, 8], windowless_id: 2, floor_area: 100..Float::INFINITY).present?)))
+    elsif (usege_in?(@building,[3, 4, 5, 7, 8]) && (((@building.basement_floor.include?("1"||"2"||"3")) && (@building.information_by_basement_floors.where(floor_area: 100..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 100..Float::INFINITY).present?))) || (usege_in?(@building,[32]) && ((@building.information_by_basement_floors.where(entirety_usege:[3, 4, 5, 6, 7, 8],floor_area: 100..Float::INFINITY).present?) || (@building.information_by_floors.where(entirety_usege:[3, 4, 5, 6, 7, 8], windowless_id: 2, floor_area: 100..Float::INFINITY).present?)))
       "#{@equipments[10]}が必要です（#{law(article: 21, paragraph: 1, item: 10, number: nil)}）"
 
     # 消防法施行令第21条第1項第11号
@@ -122,7 +122,7 @@ module BuildingsHelper
       "#{@equipments[14]}(放送設備)が必要です（#{law(article: 24, paragraph: 3, item: 3, number: nil)}）"
     
     # 消防法施行令第24条第2項第2号
-    elsif usege_in?(@building,[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]) && ((total_capacity(@building) >=50) || ((@building.information_by_basement_floors.where(floor_capacity: 20..Float::INFINITY).present?) || (@building.information_by_floors.where(windowless_id: 2, floor_capacity: 20..Float::INFINITY).present?)))
+    elsif usege_in?(@building,[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]) && ((total_capacity(@building) >= 50) || ((@building.information_by_basement_floors.where(floor_capacity: 20..Float::INFINITY).present?) || (@building.information_by_floors.where(windowless_id: 2, floor_capacity: 20..Float::INFINITY).present?)))
       "#{@equipments[14]}が必要です（#{law(article: 24, paragraph: 2, item: 2, number: nil)}）"
 
     # 消防法施行令第24条第3項第1号
