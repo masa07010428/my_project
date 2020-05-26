@@ -5,6 +5,6 @@ class InformationByBasementFloor < ApplicationRecord
   validates :floor_capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates_associated :building
 
-  belongs_to :building
+  belongs_to :building, optional: :true
   belongs_to :entirety_usege, optional: :true
 end

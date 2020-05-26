@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :set_up_building, only: [:show, :edit, :update, :destroy, :search]
-  before_action :set_up_form, only: [:new, :create, :edit]
+  before_action :set_up_form, only: [:new, :create, :edit, :update]
   # 一覧画面に対するアクション
   def index
     @buildings = Building.where(user_id: current_user.id).order(:id)
@@ -16,8 +16,10 @@ class BuildingsController < ApplicationController
   def create
     @building = Building.new(building_params)
     if @building.save
+      flash[:success] = "新規登録しました"
       redirect_to buildings_path
     else
+      flash.now[:alert] = "登録に失敗しました"
       render :new
     end
   end
@@ -32,12 +34,20 @@ class BuildingsController < ApplicationController
   
   # 建物情報更新アクション
   def update
-    @building.update(building_params)
+    if @building.update(building_params)
+      flash[:success] = "更新しました"
+      redirect_to building_path
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
+    end
   end
 
   # 削除するためのアクション
   def destroy
     @building.delete
+    flash[:success] = "削除しました"
+    redirect_to buildings_path
   end
 
   # 必要な消防用設備等について確認する
@@ -50,6 +60,7 @@ class BuildingsController < ApplicationController
   # 共通化(建物情報取得)
   def set_up_building
     @building = Building.find(params[:id])
+    @information_by_floors = @building.information_by_floors
   end
 
   # 共通化(formのセレクト部分)
