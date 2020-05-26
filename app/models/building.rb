@@ -29,13 +29,13 @@ class Building < ApplicationRecord
   # end
 
   # def basement_floor_matches_number_of_information_by_basement_floor
-  #   if basement_floor.include?("1" || "2" || "3") && basement_floor.to_i != information_by_basement_floors.length
+  #   if ["1", "2", "3"].include?(basement_floor) && basement_floor.to_i != information_by_basement_floors.length
   #     errors.add(:basement_floor, "と階別情報の数は一致させてください")
   #   end
   # end
 
   # def when_basement_floor_selected
-  #   if basement_floor.include?("1" || "2" || "3") && information_by_basement_floors.empty?
+  #   if ["1", "2", "3"].include?(basement_floor) && information_by_basement_floors.empty?
   #     errors.add(:basement_floor, "を選択した場合は、階情報を入力してください")
   #   end
   # end
@@ -47,7 +47,7 @@ class Building < ApplicationRecord
   # end
 
   # def basement_floor_matches_last_basement_floor_number
-  #   if basement_floor.include?("1" || "2" || "3") && (information_by_basement_floors.present?) && (basement_floor != information_by_basement_floors.last.floor_number)
+  #   if ["1", "2", "3"].include?(basement_floor) && (information_by_basement_floors.present?) && (basement_floor != information_by_basement_floors.last.floor_number)
   #     errors.add(:basement_floor, "と階別情報の最後に選択した階数を一致させてください")
   #   end
   # end
