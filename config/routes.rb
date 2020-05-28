@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :buildings
   # 必要な消防用設備
   get '/buildings/:id/search', to: 'buildings#search', as: 'buildings_search'
+  get '/buildings/:id/map', to: 'buildings#map', as: 'buildings_map'
 end
 

@@ -60,6 +60,7 @@
             </table>
             <p>火気使用の有無:<%= @building.fire_use %></p>
             <%= link_to "消防用設備等確認", buildings_search_path(@building), method: :get, class: "btn-gradient-radius" %>
+            <%= link_to "Map表示", buildings_map_path(@building), method: :get, class: "btn-gradient-radius" %>
             <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius" %>
             <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius"%>
           </div>
