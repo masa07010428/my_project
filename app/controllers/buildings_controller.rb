@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController
-  before_action :set_up_building, only: [:show, :edit, :update, :destroy, :search]
+  before_action :set_up_building, only: [:show, :edit, :update, :destroy, :search, :map]
   before_action :set_up_form, only: [:new, :create, :edit, :update]
   # 一覧画面に対するアクション
   def index

@@ -1,4 +1,8 @@
 ja:
+  edit: 編集
+  msg:
+    success: "%{v}が完了しました"
+
   activerecord:
     models:
       building: "建物"
