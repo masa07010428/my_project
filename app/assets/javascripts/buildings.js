@@ -9,18 +9,6 @@ $(document).on("turbolinks:load", function () {
 var map;
 var marker = [];
 var infoWindow = [];
-var markerData = [
-  {
-    name: "小田原消防署",
-    lat: 35.2790287,
-    lng: 139.1888153,
-  },
-  {
-    name: "国府津出張所",
-    lat: 35.280905,
-    lng: 139.2045593,
-  },
-];
 function initMap() {
   var target = document.getElementById("gmap");
   var address = document.getElementById("address").textContent;
@@ -49,30 +37,27 @@ function initMap() {
       marker.addListener("click", function () {
         infoWindow.open(map, marker);
       });
-      for (var i = 0; i < markerData.length; i++) {
-        markerLatLng = new google.maps.LatLng({
-          lat: markerData[i]["lat"],
-          lng: markerData[i]["lng"],
-        });
-        marker[i] = new google.maps.Marker({
-          position: markerLatLng,
-          map: map,
-          icon: "/assets/syouta.png",
-        });
-        infoWindow[i] = new google.maps.InfoWindow({
-          content: markerData[i]["name"],
-          pixelOffset: new google.maps.Size(0, 10),
-        });
-        markerEvent(i);
-      }
+      service = new google.maps.places.PlacesService(map);
+      service.nearbySearch(
+        {
+          location: results[0].geometry.location,
+          radius: 2000,
+          name: "消防署",
+        },
+        function (results) {
+          for (var i = 0; i < results.length; i++) {
+            new google.maps.Marker({
+              map: map,
+              position: results[i].geometry.location,
+              title: results[i].name,
+              icon: "/assets/syouta.png",
+            });
+          }
+        }
+      );
     } else {
       alert("Mapの読み込みに失敗しました。住所の表記を確認してください");
       return;
     }
-  });
-}
-function markerEvent(i) {
-  marker[i].addListener("click", function () {
-    infoWindow[i].open(map, marker[i]);
   });
 }

@@ -2,67 +2,72 @@
   <%= link_to "一覧画面へ", buildings_path, 'data-turbolinks': :false %>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2">
+      <div class="col-lg-12">
         <div class="col_box clearfix">
-          <div class="col-xs-6 col-sm-12">
-            <h4><%= @building.name %></h4>
-            <p>住所:<%= @building.address %></p>
-            <p>全体用途:<%= @building.entirety_usege.category %></p>
-            <p>延べ床面積(㎡):<%= @building.total_area %></p>
-            <p>総収容人員(人):<%= @building.total_capacity %></p>
-            <% if @building.basement_floor == "なし" %>
-              <p>地階:<%= @building.basement_floor %></p>
-            <% else %>
-              <p>地階:B<%= @building.basement_floor %>階</p>
+          <div class="row">
+            <div class="col-md-6">
+              <h4><%= @building.name %></h4>
+              <p id="address">住所:<%= @building.address %></p>
+              <p>全体用途:<%= @building.entirety_usege.category %></p>
+              <p>延べ床面積(㎡):<%= @building.total_area %></p>
+              <p>総収容人員(人):<%= @building.total_capacity %></p>
+              <% if @building.basement_floor == "なし" %>
+                <p>地階:<%= @building.basement_floor %></p>
+              <% else %>
+                <p>地階:B<%= @building.basement_floor %>階</p>
+                <table class="table col-lg-12">
+                  <thead>
+                    <tr align="center">
+                      <th>地階</th>
+                      <th>用途</th>
+                      <th>床面積(㎡)</th>
+                      <th>収容人員(人)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @building.information_by_basement_floors.length.times do |n| %>
+                    <tr align="center">
+                      <th>B<%=@building.information_by_basement_floors[n].floor_number %></th>
+                      <td><%=@building.information_by_basement_floors[n].entirety_usege.category %></td>
+                      <td><%=@building.information_by_basement_floors[n].floor_area %></td>
+                      <td><%=@building.information_by_basement_floors[n].floor_capacity %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              <% end %>
+              <p>階数:<%= @building.entirety_floor %>階</p>
               <table class="table col-lg-12">
-                <thead>
-                  <tr align="center">
-                    <th>地階</th>
-                    <th>用途</th>
-                    <th>床面積(㎡)</th>
-                    <th>収容人員(人)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @building.information_by_basement_floors.length.times do |n| %> 
-                  <tr align="center">
-                    <th>B<%=@building.information_by_basement_floors[n].floor_number %></th>
-                    <td><%=@building.information_by_basement_floors[n].entirety_usege.category %></td>
-                    <td><%=@building.information_by_basement_floors[n].floor_area %></td>
-                    <td><%=@building.information_by_basement_floors[n].floor_capacity %></td>
-                  </tr>
-                  <% end %>
-                </tbody>
+                  <thead>
+                    <tr align="center">
+                      <th>階数</th>
+                      <th>用途</th>
+                      <th>床面積(㎡)</th>
+                      <th>収容人員(人)</th>
+                      <th>無窓階判定</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @building.information_by_floors.length.times do |n| %>
+                    <tr align="center">
+                      <th><%=@building.information_by_floors[n].floor_number %></th>
+                      <td><%=@building.information_by_floors[n].entirety_usege.category %></td>
+                      <td><%=@building.information_by_floors[n].floor_area %></td>
+                      <td><%=@building.information_by_floors[n].floor_capacity %></td>
+                      <td><%=@building.information_by_floors[n].windowless.judgement %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
               </table>
-            <% end %>
-            <p>階数:<%= @building.entirety_floor %>階</p>
-            <table class="table col-lg-12">
-                <thead>
-                  <tr align="center">
-                    <th>階数</th>
-                    <th>用途</th>
-                    <th>床面積(㎡)</th>
-                    <th>収容人員(人)</th>
-                    <th>無窓階判定</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @building.information_by_floors.length.times do |n| %>
-                  <tr align="center">
-                    <th><%=@building.information_by_floors[n].floor_number %></th>
-                    <td><%=@building.information_by_floors[n].entirety_usege.category %></td>
-                    <td><%=@building.information_by_floors[n].floor_area %></td>
-                    <td><%=@building.information_by_floors[n].floor_capacity %></td>
-                    <td><%=@building.information_by_floors[n].windowless.judgement %></td>
-                  </tr>
-                  <% end %>
-                </tbody>
-            </table>
-            <p>火気使用の有無:<%= @building.fire_use %></p>
-            <%= link_to "消防用設備等確認", buildings_search_path(@building), method: :get, class: "btn-gradient-radius" %>
-            <%= link_to "Map表示", buildings_map_path(@building), method: :get, class: "btn-gradient-radius" %>
-            <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius" %>
-            <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius"%>
+              <p>火気使用の有無:<%= @building.fire_use %></p>
+            </div>
+            <div class="col-md-6">
+              <div id="gmap"></div>
+              <hr>
+              <%= link_to "消防用設備等確認", buildings_search_path(@building), method: :get, class: "btn-gradient-radius" %>
+              <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius" %>
+              <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius"%>
+            </div>
           </div>
         </div>
       </div>
