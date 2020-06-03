@@ -3,6 +3,10 @@ ja:
   msg:
     success: "%{v}が完了しました"
 
+  will_paginate:
+    previous_label: 前
+    next_label: 次
+
   activerecord:
     models:
       building: "建物"
