@@ -3,7 +3,7 @@ class BuildingsController < ApplicationController
   before_action :set_up_form, only: [:new, :create, :edit, :update]
   # 一覧画面に対するアクション
   def index
-    @buildings = Building.where(user_id: current_user.id).order(:id)
+    @buildings = Building.where(user_id: current_user.id).order(:id).paginate(page: params[:page], per_page: 4)
   end
 
   # 新規作成画面に対するアクション
@@ -30,6 +30,7 @@ class BuildingsController < ApplicationController
 
   # 建物情報詳細アクション
   def show
+    @equipments = Equipment.pluck(:item)
   end
   
   # 建物情報更新アクション
@@ -50,12 +51,6 @@ class BuildingsController < ApplicationController
     redirect_to buildings_path
   end
 
-  # 必要な消防用設備等について確認する
-  def search
-    # application_helper.rbに消防用設備等の必要不要のロジックを記載する
-    @equipments = Equipment.pluck(:item)
-  end
-  
   private
   # 共通化(建物情報取得)
   def set_up_building
