@@ -25,12 +25,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% @building.information_by_basement_floors.length.times do |n| %>
+                    <% @building.information_by_basement_floors.each do |building| %>
                     <tr align="center">
-                      <th>B<%=@building.information_by_basement_floors[n].floor_number %></th>
-                      <td><%=@building.information_by_basement_floors[n].entirety_usege.category %></td>
-                      <td><%=@building.information_by_basement_floors[n].floor_area %></td>
-                      <td><%=@building.information_by_basement_floors[n].floor_capacity %></td>
+                      <th>B<%=building.floor_number %></th>
+                      <td><%=building.entirety_usege.category %></td>
+                      <td><%=building.floor_area %></td>
+                      <td><%=building.floor_capacity %></td>
                     </tr>
                     <% end %>
                   </tbody>
@@ -48,13 +48,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% @building.information_by_floors.length.times do |n| %>
+                    <% @building.information_by_floors.each do |building| %>
                     <tr align="center">
-                      <th><%=@building.information_by_floors[n].floor_number %></th>
-                      <td><%=@building.information_by_floors[n].entirety_usege.category %></td>
-                      <td><%=@building.information_by_floors[n].floor_area %></td>
-                      <td><%=@building.information_by_floors[n].floor_capacity %></td>
-                      <td><%=@building.information_by_floors[n].windowless.judgement %></td>
+                      <th><%=building.floor_number %></th>
+                      <td><%=building.entirety_usege.category %></td>
+                      <td><%=building.floor_area %></td>
+                      <td><%=building.floor_capacity %></td>
+                      <td><%=building.windowless.judgement %></td>
                     </tr>
                     <% end %>
                   </tbody>
