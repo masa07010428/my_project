@@ -6,8 +6,8 @@
         <div class="col_box clearfix">
           <div class="row">
             <div class="col-md-6">
-              <h4><%= @building.name %></h4>
-              <p id="address">▶︎住所:<%= @building.address %></p>
+              <h4 id="name"><%= @building.name %></h4>
+              <h5 id="address">住所:<%= @building.address %></h5>
               <p>▶︎全体用途:<%= @building.entirety_usege.category %></p>
               <p>▶︎延べ床面積(㎡):<%= @building.total_area %></p>
               <p>▶︎総収容人員(人):<%= @building.total_capacity %></p>
