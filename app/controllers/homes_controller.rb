@@ -5,7 +5,7 @@ class HomesController < ApplicationController
   def about
   end
 
-  def introduce
+  def introduction
     @equipments = Equipment.order(:id)
   end
 
