@@ -36,19 +36,19 @@ class BuildingsController < ApplicationController
   # 建物情報更新アクション
   def update
     if @building.update(building_params)
-      if @building.entirety_floor != building_params[:information_by_floors_attributes].to_h.values.map{|h|h["_destroy"]}.count("false")
+      if @building.entirety_floor != building_params[:information_by_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
         flash.now[:alert] = "階数と階情報の数は一致させてください"
         render :edit
-      elsif @building.information_by_floors.last[:floor_number] != building_params[:information_by_floors_attributes].to_h.values.map{|h|h["_destroy"]}.count("false")
+      elsif @building.information_by_floors.last[:floor_number] != building_params[:information_by_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
         flash.now[:alert] = "階数と階情報の最後に選択した階数は一致させてください"
         render :edit
-      elsif ["1", "2", "3"].include?(@building.basement_floor) && @building.basement_floor.to_i != building_params[:information_by_basement_floors_attributes].to_h.values.map{|h|h["_destroy"]}.count("false")
+      elsif ["1", "2", "3"].include?(@building.basement_floor) && @building.basement_floor.to_i != building_params[:information_by_basement_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
         flash.now[:alert] = "地階と階情報の数は一致させてください"
         render :edit
-      elsif @building.information_by_basement_floors.last[:floor_number].to_i != building_params[:information_by_basement_floors_attributes].to_h.values.map{|h|h["_destroy"]}.count("false")
+      elsif @building.information_by_basement_floors.last[:floor_number].to_i != building_params[:information_by_basement_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
         flash.now[:alert] = "地階と階情報の最後に選択した階数は一致させてください"
         render :edit
-      elsif @building.basement_floor == "なし" && (building_params[:information_by_basement_floors_attributes].to_h.values.map{|h|h["_destroy"]}.include?("false"))
+      elsif @building.basement_floor == "なし" && (building_params[:information_by_basement_floors_attributes].to_h.values.map { |h| h["_destroy"] }.include?("false"))
         flash.now[:alert] = "地階で「なし」を選択した場合は、階情報を削除してください。"
         render :edit
       else
