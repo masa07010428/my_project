@@ -11,9 +11,6 @@ function initMap() {
   var address = document.getElementById("address").textContent;
   var building_name = document.getElementById("name").textContent;
   var geocoder = new google.maps.Geocoder();
-  var marker;
-  var infoWindow;
-  var service;
   geocoder.geocode({ address: address }, function (results, status) {
     if (status !== "OK") {
       alert("Mapの読み込みに失敗しました。住所の表記を確認してください");
@@ -29,7 +26,7 @@ function initMap() {
       alert("No results found");
       return;
     }
-    marker = new google.maps.Marker({
+    var centerMarker = new google.maps.Marker({
       position: map.getCenter(),
       map: map,
       animation: google.maps.Animation.DROP,
@@ -40,16 +37,18 @@ function initMap() {
         fontWeight: "bold",
       },
     });
-    infoWindow = new google.maps.InfoWindow({
-      content: "<li>" + building_name + "</li>" + "<li>" + address + "</li>",
+    var centerInfowindow = new google.maps.InfoWindow({
+      content: `名称：${building_name}<br>
+      住所：${address}`,
     });
-    marker.addListener("mouseover", function () {
-      infoWindow.open(map, marker);
+    centerMarker.addListener("mouseover", function () {
+      centerInfowindow.open(map, centerMarker);
     });
-    marker.addListener("mouseout", function () {
-      infoWindow.close(map, marker);
+    centerMarker.addListener("mouseout", function () {
+      centerInfowindow.close(map, centerMarker);
     });
-    service = new google.maps.places.PlacesService(map);
+
+    var service = new google.maps.places.PlacesService(map);
     service.nearbySearch(
       {
         location: results[0].geometry.location,
@@ -59,29 +58,44 @@ function initMap() {
       function (results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
-            marker[i] = new google.maps.Marker({
-              map: map,
-              position: results[i].geometry.location,
-              icon: "/assets/syouta.png",
+            request = {
+              placeId: results[i].place_id,
+              fields: [
+                "name",
+                "vicinity",
+                "formatted_phone_number",
+                "geometry",
+                "website",
+              ],
+            };
+            service.getDetails(request, function (place) {
+              console.log(place);
+              var placeMarker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                icon: "/assets/syouta.png",
+              });
+              var placeInfowindow = new google.maps.InfoWindow({
+                content: `名称：${place.name}<br>
+                住所：${place.vicinity}<br>
+                TEL：${place.formatted_phone_number}<br>
+                Web：<a href= "${place.website}" target= "_blank">Link</a>`,
+              });
+              markerEvent(map, placeMarker, placeInfowindow);
             });
-            infoWindow[i] = new google.maps.InfoWindow({
-              content:
-                "<li>" +
-                results[i].name +
-                "</li>" +
-                "<li>" +
-                results[i].vicinity +
-                "</li>",
-            });
-            markerEvent(i);
           }
         } else {
-          alert("Mapの読み込みに失敗しました。住所の表記を確認してください");
+          alert("周辺情報の読み込みに失敗しました。");
           return;
         }
-        function markerEvent(i) {
-          marker[i].addListener("click", function () {
-            infoWindow[i].open(map, marker[i]);
+        var currentInfoWindow;
+        function markerEvent(map, placeMarker, placeInfowindow) {
+          placeMarker.addListener("click", function () {
+            if (currentInfoWindow) {
+              currentInfoWindow.close();
+            }
+            placeInfowindow.open(map, placeMarker);
+            currentInfoWindow = placeInfowindow;
           });
         }
       }
