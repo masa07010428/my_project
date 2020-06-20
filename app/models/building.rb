@@ -7,12 +7,12 @@ class Building < ApplicationRecord
   validates :total_area, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :total_capacity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :fire_use, presence: true
-  validate :entirety_floor_matches_last_floor_number, on: :create
-  validate :entirety_floor_matches_number_of_information_by_floor, on: :create
-  validate :when_basement_floor_selected, on: :create
-  validate :when_basement_floor_select_nothing, on: :create
-  validate :basement_floor_matches_last_basement_floor_number, on: :create
-  validate :basement_floor_matches_number_of_information_by_basement_floor, on: :create
+  validate :entirety_floor_matches_last_floor_number
+  validate :entirety_floor_matches_number_of_information_by_floor
+  validate :when_basement_floor_selected
+  validate :when_basement_floor_select_nothing
+  validate :basement_floor_matches_last_basement_floor_number
+  validate :basement_floor_matches_number_of_information_by_basement_floor
 
   private
   def entirety_floor_matches_last_floor_number
