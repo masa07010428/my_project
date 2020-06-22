@@ -5,6 +5,17 @@ $(document).on("turbolinks:load", function () {
   }
 });
 
+// 3項選択時、form変更
+function formChange() {
+  var id = document.getElementById("building_entirety_usege_id").value;
+  if (id == "7" || id == "8") {
+    document.getElementById("fireUse").style.display = "inline";
+  } else {
+    document.getElementById("fireUse").style.display = "none";
+  }
+}
+window.onload = formChange;
+
 // Google map
 function initMap() {
   var target = document.getElementById("gmap");
@@ -78,7 +89,7 @@ function initMap() {
               var placeInfowindow = new google.maps.InfoWindow({
                 content: `名称：${place.name}<br>
                 住所：${place.vicinity}<br>
-                TEL：${place.formatted_phone_number}<br>
+                Tel：${place.formatted_phone_number}<br>
                 Web：<a href= "${place.website}" target= "_blank">Link</a>`,
               });
               markerEvent(map, placeMarker, placeInfowindow);

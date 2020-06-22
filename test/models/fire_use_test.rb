@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class InformationByBasementFloorTest < ActiveSupport::TestCase
+class FireUseTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

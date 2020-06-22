@@ -2,7 +2,15 @@
 <h1>建物情報入力</h1>
 <%= form_with model: @building, url: buildings_path, local: true do |f| %>
   <div class="form-group">
-    <%= f.label :name, "名称", class:"col-sm-3 control-label" %>
+    <div class="col-sm-8">
+      <%= f.label :building_type_id, "建物タイプ", class:"col-sm-3 control-label" %>
+      <%= f.collection_radio_buttons :building_type_id, @building_types, :id, :b_type, { checked: @building_types.first.id } %>
+      <p class="text-muted">※建物全体が同じ用途の場合→単独、建物内に複数用途がある場合→複合を選択してください。</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, "建物名称 / テナント名", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
       <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "建物名称を入力してください" %>
       <% if @building.errors.include?(:name) %>
@@ -22,66 +30,24 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :entirety_usege_id, "全体用途", class:"col-sm-3 control-label"  %>
+    <%= f.label :entirety_usege_id, "用途", class:"col-sm-3 control-label"  %>
     <div class="col-sm-8">
-      <%= f.collection_select :entirety_usege_id, @entirety_useges, :id, :view_category_and_example, {prompt: "選択してください"} %>
+      <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={include_blank: "選択してください"}, html_options={onchange: "formChange();"}) %>
       <% if @building.errors.include?(:entirety_usege_id) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:entirety_usege_id).first %></p>
       <% end %>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :total_area, "延べ床面積（㎡）", class:"col-sm-3 control-label" %>
+  <div class="form-group radio-inline" id="fireUse">
     <div class="col-sm-8">
-      <%= f.text_field :total_area, autofocus: true, type: 'tel', placeholder: "半角数字で入力してください", class: 'form-control' %>
-      <% if @building.errors.include?(:total_area) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:total_area).first %></p>
-      <% end %>
+      <%= f.label :fire_use_id, "火気使用設備の有無", class:"col-sm-3 control-label" %>
+      <%= f.collection_radio_buttons :fire_use_id, @fire_uses, :id, :fire_use_select, { checked: @fire_uses.second.id } %>
+      <p class="text-muted">※ガスコンロなどの設備がある場合は、有りを選択してください。</p>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :total_capacity, "総収容人員(人)", class:"col-sm-3 control-label" %>
-    <div class="col-sm-8">
-      <%= f.text_field :total_capacity, autofocus: true, placeholder: "半角数字で入力してください", class: 'form-control' %>
-      <% if @building.errors.include?(:total_capacity) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:total_capacity).first %></p>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :basement_floor, "地階", class: "col-sm-3 control-label" %>
-    <div class="col-sm-8">
-      <%= f.select :basement_floor, @entirety_basement_floors, {prompt: "選択してください"} %>
-      <% if @building.errors.include?(:basement_floor) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:basement_floor).first %></p>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="buildings col-sm-8">
-      <%= f.fields_for :information_by_basement_floors do |i| %>
-        <%= render "information_by_basement_floor_fields", f: i %>
-      <% end %>
-      <div class="links" id="basement_floor">
-        <%= link_to_add_association '＋階情報を追加', f, :information_by_basement_floors %>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
-    <div class="col-sm-8">
-      <%= f.select :entirety_floor, @entirety_floors, {prompt: "選択してください"} %>
-      <% if @building.errors.include?(:entirety_floor) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:entirety_floor).first %></p>
-      <% end %>
-    </div>
-  </div>
-  
+  <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
   <div class="form-group">
     <div class="buildings col-sm-8">
       <%= f.fields_for :information_by_floors do |i| %>
@@ -90,18 +56,6 @@
       <div class="links">
         <%= link_to_add_association '＋階情報を追加', f, :information_by_floors %>
       </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="col-sm-3 control-label">火気使用の有無</label>
-    <div class="col-sm-8">
-      <%= f.radio_button :fire_use, :有 %>
-      <%= f.label :有, class: "col-sm-3 control-label" %>
-    </div>
-    <div class="col-sm-8">
-      <%= f.radio_button :fire_use, :無, checked: "checked" %>
-      <%= f.label :無, class: "col-sm-3 control-label" %>
     </div>
   </div>
 
