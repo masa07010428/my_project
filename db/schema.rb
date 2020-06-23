@@ -10,20 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_021016) do
+ActiveRecord::Schema.define(version: 2020_06_22_112608) do
+
+  create_table "building_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "b_type"
+  end
 
   create_table "buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.text "address"
     t.integer "entirety_usege_id"
-    t.integer "entirety_floor"
-    t.string "basement_floor"
-    t.integer "total_area"
-    t.integer "total_capacity"
-    t.string "fire_use"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "building_type_id"
+    t.integer "fire_use_id"
   end
 
   create_table "entirety_useges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -47,12 +50,8 @@ ActiveRecord::Schema.define(version: 2020_05_28_021016) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "information_by_basement_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "building_id"
-    t.string "floor_number"
-    t.string "entirety_usege_id"
-    t.integer "floor_area"
-    t.integer "floor_capacity"
+  create_table "fire_uses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "fire_use_select"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,7 +59,6 @@ ActiveRecord::Schema.define(version: 2020_05_28_021016) do
   create_table "information_by_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "building_id"
     t.integer "floor_number"
-    t.string "entirety_usege_id"
     t.integer "floor_area"
     t.integer "floor_capacity"
     t.integer "windowless_id"

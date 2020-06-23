@@ -8,40 +8,14 @@
             <div class="col-md-6">
               <h4 id="name"><%= @building.name %></h4>
               <h5 id="address">住所:<%= @building.address %></h5>
-              <p>▶︎全体用途:<%= @building.entirety_usege.category %></p>
-              <p>▶︎延べ床面積(㎡):<%= @building.total_area %></p>
-              <p>▶︎総収容人員(人):<%= @building.total_capacity %></p>
-              <% if @building.basement_floor == "なし" %>
-                <p>▶︎地階:<%= @building.basement_floor %></p>
-              <% else %>
-                <p>▶︎地階:B<%= @building.basement_floor %>階</p>
-                <table class="table table-bordered table-striped col-lg-12">
-                  <thead>
-                    <tr align="center">
-                      <th>地階</th>
-                      <th>用途</th>
-                      <th>床面積(㎡)</th>
-                      <th>収容人員(人)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @building.information_by_basement_floors.each do |building| %>
-                    <tr align="center">
-                      <th>B<%=building.floor_number %></th>
-                      <td><%=building.entirety_usege.category %></td>
-                      <td><%=building.floor_area %></td>
-                      <td><%=building.floor_capacity %></td>
-                    </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-              <% end %>
-              <p>▶︎階数:<%= @building.entirety_floor %>階</p>
+              <p>用途:<%= @building.entirety_usege.category %></p>
+              <p>延べ面積(㎡):<%= @building.information_by_floors.all.sum(:floor_area) %></p>
+              <p>収容人員(人):<%= @building.information_by_floors.all.sum(:floor_capacity) %></p>
+              <p>階数:<%= @building.information_by_floors.last.floor_number %>階</p>
               <table class="table table-bordered table-striped col-lg-12">
                   <thead>
                     <tr align="center">
                       <th>階数</th>
-                      <th>用途</th>
                       <th>床面積(㎡)</th>
                       <th>収容人員(人)</th>
                       <th>無窓階判定</th>
@@ -51,7 +25,6 @@
                     <% @building.information_by_floors.each do |building| %>
                     <tr align="center">
                       <th><%=building.floor_number %></th>
-                      <td><%=building.entirety_usege.category %></td>
                       <td><%=building.floor_area %></td>
                       <td><%=building.floor_capacity %></td>
                       <td><%=building.windowless.judgement %></td>
@@ -59,7 +32,9 @@
                     <% end %>
                   </tbody>
               </table>
-              <p>▶︎火気使用の有無:<%= @building.fire_use %></p>
+              <% if [7,8].include?(@building.entirety_usege_id) %>
+                <p>火気設備使用の有無:<%= @building.fire_use.fire_use_select %></p>
+              <% end %>
             </div>
             <div class="col-md-6">
               <div id="gmap"></div>
@@ -72,19 +47,19 @@
                   <table class="table table-bordered table-striped">
                     <tbody>
                       <tr>
-                        <td><%= fire_extinguisher %></td>
+                        <%# <td><%= fire_extinguisher %></td> %>
                       </tr>
                       <tr>
-                        <td><%= automatic_fire_alarm_equipment %></td>
+                        <%# <td><%= automatic_fire_alarm_equipment %></td> %>
                       </tr>
                       <tr>
-                        <td><%= emergency_alarm_equipment %></td>
+                        <%# <td><%= emergency_alarm_equipment %></td> %>
                       </tr>
                       <tr>
-                        <td><%= evacuation_tool %></td>
+                        <%# <td><%= evacuation_tool %></td> %>
                       </tr>
                       <tr>
-                        <td><%= guide_light %></td>
+                        <%# <td><%= guide_light %></td> %>
                       </tr>
                     </tbody>
                   </table>
