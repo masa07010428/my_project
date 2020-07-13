@@ -36,25 +36,8 @@ class BuildingsController < ApplicationController
   # 建物情報更新アクション
   def update
     if @building.update(building_params)
-      if @building.entirety_floor != building_params[:information_by_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
-        flash.now[:alert] = "階数と階情報の数は一致させてください"
-        render :edit
-      elsif @building.information_by_floors.last[:floor_number] != building_params[:information_by_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
-        flash.now[:alert] = "階数と階情報の最後に選択した階数は一致させてください"
-        render :edit
-      elsif ["1", "2", "3"].include?(@building.basement_floor) && @building.basement_floor.to_i != building_params[:information_by_basement_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
-        flash.now[:alert] = "地階と階情報の数は一致させてください"
-        render :edit
-      elsif @building.basement_floor == "なし" && (building_params[:information_by_basement_floors_attributes].to_h.values.map { |h| h["_destroy"] }.include?("false"))
-        flash.now[:alert] = "地階で「なし」を選択した場合は、階情報を削除してください。"
-        render :edit
-      elsif @building.information_by_basement_floors.last[:floor_number].to_i != building_params[:information_by_basement_floors_attributes].to_h.values.map { |h| h["_destroy"] }.count("false")
-        flash.now[:alert] = "地階と階情報の最後に選択した階数は一致させてください"
-        render :edit
-      else
-        flash[:success] = "更新しました"
-        redirect_to building_path
-      end
+      flash[:success] = "更新しました"
+      redirect_to building_path
     else
       flash.now[:alert] = "更新に失敗しました"
       render :edit
@@ -78,27 +61,21 @@ class BuildingsController < ApplicationController
   # 共通化(formのセレクト部分)
   def set_up_form
     @entirety_useges = EntiretyUsege.order(:id)
-    @entirety_floors = 3.times.map { |n| ["B#{n+1}階", n+1] }.reverse + 20.times.map { |n| ["#{n+1}階", n+1] }
+    @floor_numbers = FloorNumber.order(:id)
     @windowlesses = Windowless.order(:id)
     @building_types = BuildingType.order(:id)
     @fire_uses = FireUse.order(:id)
     @information_by_floor_errors = [
-      :"information_by_floors.floor_number",
+      :"information_by_floors.floor_number_id",
       :"information_by_floors.entirety_usege_id",
       :"information_by_floors.floor_area",
       :"information_by_floors.floor_capacity",
       :"information_by_floors.windowless_id"
     ]
-    @information_by_basement_floor_errors = [
-      :"information_by_basement_floors.floor_number",
-      :"information_by_basement_floors.entirety_usege_id",
-      :"information_by_basement_floors.floor_area",
-      :"information_by_basement_floors.floor_capacity"
-    ]
   end
 
   # strong parameter
   def building_params
-    params.require(:building).permit(:user_id, :id, :building_type_id, :name, :address, :entirety_usege_id, :fire_use_id, information_by_floors_attributes:[:id, :building_id, :floor_number, :floor_area, :floor_capacity, :windowless_id, :_destroy])
+    params.require(:building).permit(:user_id, :id, :building_type_id, :name, :address, :entirety_usege_id, :fire_use_id, information_by_floors_attributes:[:id, :building_id, :floor_number_id , :floor_area, :floor_capacity, :windowless_id, :_destroy])
   end
 end

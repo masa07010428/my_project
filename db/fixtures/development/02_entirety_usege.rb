@@ -67,13 +67,13 @@ end
 EntiretyUsege.seed do |s|
   s.id = 12
   s.category = "6項イ(1)"
-  s.example = "病院(産婦人科、歯科、小児科などが有るもの）で療養病床または一般病床があるもの"
+  s.example = "病院(産婦人科、小児科などが有る)で療養病床、一般病床があるもの"
 end
 
 EntiretyUsege.seed do |s|
   s.id = 13
   s.category = "6項イ(2)"
-  s.example = "診療所(産婦人科、歯科、小児科などが有るもの）で４人以上の患者を入院させるための施設があるもの"
+  s.example = "診療所(産婦人科、小児科などが有る)で４人以上の患者が入院できるもの"
 end
 
 EntiretyUsege.seed do |s|
@@ -91,18 +91,18 @@ end
 EntiretyUsege.seed do |s|
   s.id = 16
   s.category = "6項ロ"
-  s.example = "（重度）特別養護老人ホーム,介護老人保健施設障害者グループホームなど"
+  s.example = "(重度)特別養護老人ホーム,介護老人保健施設、障害者グループホームなど"
 end
 
 EntiretyUsege.seed do |s|
   s.id = 17
-  s.category = "6項ハ(入居又は宿泊あり）"
-  s.example = "上記より入居者の介護度や障害支援区分が軽度な施設（入居または宿泊あり）、保育園など"
+  s.category = "6項ハ(入居又は宿泊あり)"
+  s.example = "上記より入居者の介護度などが軽度な施設(入居、宿泊あり)、保育園など"
 end
 
 EntiretyUsege.seed do |s|
   s.id = 18
-  s.category = "6項ハ(入居又は宿泊なし）"
+  s.category = "6項ハ(入居又は宿泊なし)"
   s.example = "上記の施設の入居または宿泊がないもの、保育園など"
 end
 

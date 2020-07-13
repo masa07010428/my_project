@@ -190,6 +190,12 @@ footer {
   border-radius: 10px;
 }
 
+.modal-dialog-fluid {
+  max-width: inherit;
+  width: 80%;
+  margin-left: 15px;
+}
+
 // ログイン画面
 .login-wrapper {
   margin: 50px 50px 0 50px;
@@ -214,10 +220,6 @@ footer {
 // 新規登録部分
 .sign_up_wrapper {
   margin: 50px 50px 0 50px;
-}
-
-#fireUse {
-  display: none;
 }
 
 // アカウント確認部分
@@ -299,4 +301,8 @@ footer {
 
 .pagination > li > a:hover {
   border-radius: 10px;
+}
+
+#fireUse {
+  display: none;
 }

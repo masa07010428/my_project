@@ -2,11 +2,11 @@ module BuildingsHelper
   # 消防法施行令第10条第1項
   def fire_extinguisher
     # 消防法施行令第10条第1項第1号イ
-    if usege_in?(@building,[1, 3, 4, 5, 6, 12, 13, 14, 16, 34, 35, 36, 39])
+    if usege_in?(@building,[1, 3, 4, 5, 6, 12, 13, 14, 16])
       "#{@equipments[0]}が必要です（#{law(10, 1, 1, "イ")})"
 
     # 消防法施行令第10条第1項第1号ロ
-    elsif usege_in?(@building,[7, 8]) && @building.fire_use == "有"
+    elsif usege_in?(@building,[7, 8]) && @building.fire_use_id == 1
       "#{@equipments[0]}が必要です（#{law(10, 1, 1, "ロ")}）"
 
     # 消防法施行令第10条第1項第2号イ
@@ -14,7 +14,7 @@ module BuildingsHelper
       "#{@equipments[0]}が必要です（#{law(10, 1, 2, "イ")}）"
 
     # 消防法施行令第10条第1項第2号ロ
-    elsif total_area(@building,150) && usege_in?(@building,[7, 8]) && @building.fire_use == "無"
+    elsif total_area(@building,150) && usege_in?(@building,[7, 8]) && @building.fire_use_id == 2
       "#{@equipments[0]}が必要です（#{law(10, 1, 2, "ロ")}）"
 
     # 消防法施行令第10条第1項第3号 
@@ -24,7 +24,7 @@ module BuildingsHelper
     # 消防法施行令第10条第1項第4号は少量危険物のためなし
 
     # 消防法施行令第10条第1項第5号
-    elsif ((["1", "2", "3"].include?(@building.basement_floor)) && (@building.information_by_basement_floors.where(floor_area: 50..Float::INFINITY).present?)) || (@building.information_by_floors.where(windowless_id: 2, floor_area: 50..Float::INFINITY).present?) || ((@building.entirety_floor >= 3) && (@building.information_by_floors.where(floor_area: 50..Float::INFINITY).present?))
+    elsif ((@building.information_by_floors.pluck(:floor_number_id).any?{|t| [1,2,3].include?(t)}) && (@building.information_by_floors.where(floor_number_id: [1, 2, 3]).where('floor_area>=?', 50).present?)) || (@building.information_by_floors.where('windowless_id>=?', 2).where('floor_area>=?', 50).present?) || (@building.information_by_floors.where('floor_number_id>=?', 6).where('floor_area>=?', 50).present?)
       "#{@equipments[0]}が必要です（#{law(10, 1, 5, nil)}）"
 
     else
@@ -188,15 +188,13 @@ module BuildingsHelper
   end
 
   def total_area(building,n)
-    building.total_area >= n
+    building.information_by_floors.all.sum(:floor_area) >= n
   end
 
   def total_capacity(building)
     building.total_capacity
   end
-
   
-
   def law(article, paragraph, item, number)
     "消防法施行令第#{article}条第#{paragraph}項第#{item}号#{number}"
   end

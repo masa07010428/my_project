@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_112608) do
+ActiveRecord::Schema.define(version: 2020_07_11_103139) do
 
   create_table "building_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -56,9 +56,15 @@ ActiveRecord::Schema.define(version: 2020_06_22_112608) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "floor_numbers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "floor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "information_by_floors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "building_id"
-    t.integer "floor_number"
+    t.integer "floor_number_id"
     t.integer "floor_area"
     t.integer "floor_capacity"
     t.integer "windowless_id"
