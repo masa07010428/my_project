@@ -11,7 +11,7 @@ function formChange() {
   document.getElementById(
     "usageInfo"
   ).innerHTML = `<p>※あなたが選択した用途は、『${category}』に該当します。収容人員算定の際に必要です。</p>`;
-  if (category === "7" || category === "8") {
+  if (["7", "8"].includes(category)) {
     document.getElementById("fireUse").style.display = "inline";
   } else {
     document.getElementById("fireUse").style.display = "none";

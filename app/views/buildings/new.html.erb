@@ -33,7 +33,7 @@
   <div class="form-group">
     <%= f.label :entirety_usege_id, "用途", class:"col-sm-3 control-label"  %>
     <div class="col-sm-8">
-      <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={include_blank: "選択してください"}, html_options={onchange: "formChange();"}) %>
+      <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={ include_blank: "選択してください" }, html_options={ onchange: "formChange();" }) %>
       <% if @building.errors.include?(:entirety_usege_id) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:entirety_usege_id).first %></p>
       <% end %>
