@@ -7,8 +7,11 @@ $(document).on("turbolinks:load", function () {
 
 // 3項選択時、form変更
 function formChange() {
-  var id = document.getElementById("building_entirety_usege_id").value;
-  if (id == "7" || id == "8") {
+  const category = document.getElementById("building_entirety_usege_id").value;
+  document.getElementById(
+    "usageInfo"
+  ).innerHTML = `<p>※あなたが選択した用途は、『${category}』に該当します。収容人員算定の際に必要です。</p>`;
+  if (["7", "8"].includes(category)) {
     document.getElementById("fireUse").style.display = "inline";
   } else {
     document.getElementById("fireUse").style.display = "none";

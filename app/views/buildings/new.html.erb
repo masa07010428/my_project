@@ -2,17 +2,9 @@
 <h1>建物情報入力</h1>
 <%= form_with model: @building, url: buildings_path, local: true do |f| %>
   <div class="form-group">
-    <div class="col-sm-8">
-      <%= f.label :building_type_id, "建物タイプ", class:"col-sm-3 control-label" %>
-      <%= f.collection_radio_buttons :building_type_id, @building_types, :id, :b_type, { checked: @building_types.first.id } %>
-      <p class="text-muted">※建物全体が同じ用途の場合→単独、建物内に複数用途がある場合→複合を選択してください。</p>
-    </div>
-  </div>
-
-  <div class="form-group">
     <%= f.label :name, "建物名称 / テナント名", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "建物名称を入力してください" %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "建物名称/テナント名を入力してください" %>
       <% if @building.errors.include?(:name) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:name).first %></p>
       <% end %>
@@ -22,7 +14,7 @@
   <div class="form-group">
     <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "建物の住所を入力してください"%>
+      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "建物の住所を入力してください。入力すると周囲の消防署の情報を表示できます。"%>
       <% if @building.errors.include?(:address) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:address).first %></p>
       <% end %>
@@ -30,9 +22,18 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :building_type_id, "建物タイプ", class:"col-sm-3 control-label" %><br>
+    <div class="col-sm-8">
+      <%= f.collection_radio_buttons :building_type_id, @building_types, :id, :b_type, { checked: @building_types.first.id } do |b| %>
+        <%= b.label {b.radio_button + b.text} %><br>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :entirety_usege_id, "用途", class:"col-sm-3 control-label"  %>
     <div class="col-sm-8">
-      <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={include_blank: "選択してください"}, html_options={onchange: "formChange();"}) %>
+      <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={ include_blank: "選択してください" }, html_options={ onchange: "formChange();" }) %>
       <% if @building.errors.include?(:entirety_usege_id) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:entirety_usege_id).first %></p>
       <% end %>
@@ -41,14 +42,163 @@
 
   <div class="form-group radio-inline" id="fireUse">
     <div class="col-sm-8">
-      <%= f.label :fire_use_id, "火気使用設備の有無", class:"col-sm-3 control-label" %>
+      <%= f.label :fire_use_id, "ガスコンロ等の使用の有無", class:"col-sm-3 control-label" %>
       <%= f.collection_radio_buttons :fire_use_id, @fire_uses, :id, :fire_use_select, { checked: @fire_uses.second.id } %>
-      <p class="text-muted">※ガスコンロなどの設備がある場合は、有りを選択してください。</p>
     </div>
   </div>
 
-  <%= f.label :entirety_floor, "階数", class:"col-sm-3 control-label" %>
+  <div class="form-group radio-inline">
+    <div class="col-sm-8" id="usageInfo">
+    </div>
+  </div>
+
   <div class="form-group">
+    <%= f.label :entirety_floor, "階情報", class:"col-sm-1 control-label" %>
+    <a class="btn-gradient-radius-mini" href="" data-toggle="modal" data-target="#capacityModal">収容人員算定表</a>
+    <div class="modal fade" id="capacityModal" tabindex="-1" role="dialog" aria-labelledby="capacityModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="capacityModalTitle">収容人員</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>算出方法</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1,2</th>
+                  <td>
+                    <p>次にあげる計算方法で算出した値の合計とする。</p>
+                    <ul>
+                      <li>従業員の数</li>
+                      <li>客席の部分ごとに次の1から3までによつて算出した数の合計数</li>
+                      <ol>
+                        <li>固定式のいす席については、いす席の数に対応する数。※この場合において、長いす席にあっては、当いす席の正面幅を 0.4 ｍで割って得た数（1未満は切り捨て）とする。</li>
+                        <li>立見席については、当部分の床面積を 0.2 ㎡で割って得た数</li>
+                        <li>その他の部分については、当部分の床面積を 0.5 ㎡で割って得た数</li>
+                      </ol>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>3, 5~8</th>
+                  <td>
+                    <p>次にあげる計算方法で算出した値の合計とする。</p>
+                    <ul>
+                      <li>従業員の数</li>
+                      <li>客席の部分ごとに次の1及び2によつて算出した数の合計数</li>
+                      <ol>
+                        <li>固定式のいす席については、いす席の数に対応する数。※この場合において、長いす式にあっては、当いす席の正面幅を 0.5 ｍで割って得た数（1未満は切り捨て）とする。</li>
+                        <li>その他の部分については、当部分の床面積を 3 ㎡で割って得た数</li>
+                      </ol>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>4</th>
+                  <td>
+                    <p>次にあげる計算方法で算出した値の合計とする。</p>
+                    <ul>
+                      <li>従業員の数</li>
+                      <li>遊技（囲碁、将棋、麻雀及びパチンコ屋など）のための遊具を使用して遊技を行うことができる者の数</li>
+                      <li>観覧，飲食又は休憩の用に供する固定式のいす席が設けられている場合は，当いす席の数に対応する数。この場合において，長いす式のいす席にあつては，当いす席の正面幅を 0.5 ｍで割って得た数（1未満は切り捨てる）とする</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>9</th>
+                  <td>
+                    <p>次にあげる計算方法で算出した値の合計とする。</p>
+                    <ul>
+                      <li>従業員の数</li>
+                      <li>主として従業者以外の者の使用に供する部分について次の1及び2によつて算定した数の合計数</li>
+                      <ol>
+                        <li>飲食又は休憩の用に供する部分については，当部分の床面積を３㎡で割って得た数</li>
+                        <li>その他の部分については，当部分の床面積を４㎡で割って得た数</li>
+                      </ol>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>10</th>
+                  <td>
+                    <p>次にあげる計算方法で算出した値の合計とする。</p>
+                    <ul>
+                      <li>従業員の数</li>
+                      <li>宿泊室ごとに次の1及び2によつて算定した数の合計数</li>
+                        <ol>
+                          <li>洋式の宿泊室については，当宿泊室にあるベッドの数</li>
+                          <li>和式の宿泊室については，当宿泊室の床面積を６㎡（簡易宿所及び主として団体客を宿泊させるものにあつては，３㎡）で割って得た数</li>
+                        </ol>
+                      <li>集会，飲食又は休憩の用に供する部分について次の1及び2によつて算定した数の合計数</li>
+                        <ol>
+                          <li>固定式のいす席を設ける部分については，当部分にあるいす席の数。この場合において，長いす式のいす席にあつては，当いす席の正面幅を 0.5 mで割って得た数（１未満は切り捨て）とする。</li>
+                          <li>その他の部分については，当該部分の床面積を３㎡で割って得た数</li>
+                        </ol>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>11</th>
+                  <td>居住者の数により算定する。</td>
+                </tr>
+                <tr>
+                  <th>12~15</th>
+                  <td>
+                    <p>次にあげる計算方法で算出した値の合計とする。</p>
+                    <ul>
+                      <li>医師，歯科医師，助産師，薬剤師，看護師その他の従業者の数</li>
+                      <li>病室内にある病床の数</li>
+                      <li>待合室の床面積の合計を３㎡で割って得た数</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>16~18</th>
+                  <td>従業者の数と，老人，乳児，幼児，身体障害者，知的障害者その他の要保護者の数とを合算して算定する。</td>
+                </tr>
+                <tr>
+                  <th>19</th>
+                  <td>教職員の数と，幼児，児童又は生徒の数とを合算して算定する。</td>
+                </tr>
+                <tr>
+                  <th>20</th>
+                  <td>教職員の数と，児童，生徒又は学生の数とを合算して算定する。</td>
+                </tr>
+                <tr>
+                  <th>21</th>
+                  <td>従業者の数と，閲覧室，展示室，展覧室，会議室又は休憩室の床面積の合計を３㎡で割って得た数とを合算して算定する。</td>
+                </tr>
+                <tr>
+                  <th>22,23</th>
+                  <td>従業者の数と，浴場，脱衣場，マッサージ室及び休憩の用に供する部分の床面積の合計を３㎡で割って得た数とを合算して算定する。</td>
+                </tr>
+                <tr>
+                  <th>24,26~30</th>
+                  <td>従業者の数により算定する。</td>
+                </tr>
+                <tr>
+                  <th>25</th>
+                  <td>神職，僧侶，牧師その他従業者の数と，礼拝，集会又は休憩の用に供する部分の床面積の合計を３㎡で割って得た数とを合算して算定する。</td>
+                </tr>
+                <tr>
+                  <th>31</th>
+                  <td>従業者の数と，主として従業者以外の者の使用に供する部分の床面積を３㎡で割って得た数とを合算して算定する。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="buildings col-sm-8">
       <%= f.fields_for :information_by_floors do |i| %>
         <%= render "information_by_floor_fields", f: i %>
@@ -65,3 +215,4 @@
     <%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
   </div>
 <% end %>
+

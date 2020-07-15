@@ -8,10 +8,10 @@
             <div class="col-md-6">
               <h4 id="name"><%= @building.name %></h4>
               <h5 id="address">住所:<%= @building.address %></h5>
+              <p>建物タイプ:<%= @building.building_type.b_type %>
               <p>用途:<%= @building.entirety_usege.category %></p>
               <p>延べ面積(㎡):<%= @building.information_by_floors.all.sum(:floor_area) %></p>
               <p>収容人員(人):<%= @building.information_by_floors.all.sum(:floor_capacity) %></p>
-              <p>階数:<%= @building.information_by_floors.last.floor_number %>階</p>
               <table class="table table-bordered table-striped col-lg-12">
                   <thead>
                     <tr align="center">
@@ -24,7 +24,7 @@
                   <tbody>
                     <% @building.information_by_floors.each do |building| %>
                     <tr align="center">
-                      <th><%=building.floor_number %></th>
+                      <td><%=building.floor_number.floor %></td>
                       <td><%=building.floor_area %></td>
                       <td><%=building.floor_capacity %></td>
                       <td><%=building.windowless.judgement %></td>
@@ -47,7 +47,7 @@
                   <table class="table table-bordered table-striped">
                     <tbody>
                       <tr>
-                        <%# <td><%= fire_extinguisher %></td> %>
+                        <td><%= fire_extinguisher %></td>
                       </tr>
                       <tr>
                         <%# <td><%= automatic_fire_alarm_equipment %></td> %>
@@ -69,7 +69,7 @@
                   <a class="js-modal-close btn-gradient-radius" href="">Close</a>
                 </div>
               </div>
-              <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius w-25 three-btn" %>
+              <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius w-25 three-btn", 'data-turbolinks': :false %>
               <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius w-25 three-btn"%>
             </div>
           </div>
