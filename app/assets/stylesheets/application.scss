@@ -28,7 +28,7 @@ header {
   margin: 0 auto;
 }
 
-.headerNavBtn {
+.header-nav-btn {
   text-align: center;
   height: 2em;
   line-height: 2em;
@@ -37,12 +37,12 @@ header {
   width: 50%;
 }
 
-.headerNavBtn:hover {
+.header-nav-btn:hover {
   background: #eee;
   text-decoration: none;
 }
 
-.headerNav {
+.header-nav {
   border-bottom: 3px solid rgb(240, 240, 240);
 }
 
@@ -74,7 +74,8 @@ header {
   width: 100%;
 }
 
-中央section部分 .section {
+// 中央section部分
+.section {
   background: rgb(177, 173, 173);
   background: -moz-linear-gradient(
     50% 0% -90deg,

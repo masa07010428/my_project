@@ -4,7 +4,7 @@
   <div class="form-group">
     <%= f.label :name, "建物名称 / テナント名", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "例：〇〇レストランなど" %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "例：古民家レストラン" %>
       <% if @building.errors.include?(:name) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:name).first %></p>
       <% end %>
@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "例：〇〇県〇〇市〇〇1−1−1"%>
+      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "例：東京都港区芝公園４−２−８" %>
       <% if @building.errors.include?(:address) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:address).first %></p>
       <% end %>

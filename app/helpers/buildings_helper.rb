@@ -113,7 +113,7 @@ module BuildingsHelper
     # 消防法施行令第24条第3項第3号は（16）項に関係するためなし
 
     # 消防法施行令第24条第2項第2号
-    elsif usege_in?(@building,[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]) && ((total_capacity(@building) >= 50) || (@building.information_by_floors.where(floor_number_id: [1, 2, 3]).or(@building.information_by_floors.where('windowless_id>=?', 2)).all.sum(:floor_capacity) >= 20))
+    elsif usege_in?(@building,[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]) && ((total_capacity(@building) >= 50) || (@building.information_by_floors.where(floor_number_id: [1, 2, 3]).or(@building.information_by_floors.where('windowless_id >= ?', 2)).all.sum(:floor_capacity) >= 20))
       "#{@equipments[14]}が必要です（#{law(24, 2, 2, nil)}）"
 
     # 消防法施行令第24条第3項第1号は（16の2）項及び（16の3）項に関係するためなし
@@ -146,7 +146,7 @@ module BuildingsHelper
       "#{@equipments[15]}が必要です（#{law(25, 1, 3, nil)}）"
     
     # 消防法施行令第25条第1項第4号
-    elsif usege_in?(@building,[26, 27, 31]) && ((@building.information_by_floors.where('floor_number_id >= ?', 5).where('windowless_id>=?', 2).where('floor_capacity >=?', 100).present?) || (basement_floor_number_and_capacity(@building, 100)) || (more_thna_2nd_floor_number_and_capacity(@building, 150)))
+    elsif usege_in?(@building,[26, 27, 31]) && ((@building.information_by_floors.where('floor_number_id >= ?', 5).where('windowless_id >= ?', 2).where('floor_capacity >= ?', 100).present?) || (basement_floor_number_and_capacity(@building, 100)) || (more_thna_2nd_floor_number_and_capacity(@building, 150)))
       "#{@equipments[15]}が必要です（#{law(25, 1, 4, nil)}）"
 
     # 消防法施行令第25条第1項第5号は避難階及び避難階段が関係するためなし
@@ -164,7 +164,7 @@ module BuildingsHelper
     elsif (usege_in?(@building,[11, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31])) && (@building.information_by_floors.where('floor_number_id <= ?', 3).present?) 
       "地階部分には、#{@equipments[16]}が必要です（#{law(26, 1, 1, nil)}、#{law(26, 1, 2, nil)}）"
 
-    elsif (usege_in?(@building,[11, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31])) && (@building.information_by_floors.where('windowless_id>=?', 2).present?) 
+    elsif (usege_in?(@building,[11, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31])) && (@building.information_by_floors.where('windowless_id >= ?', 2).present?) 
       "無窓階部分には、#{@equipments[16]}が必要です（#{law(26, 1, 1, nil)}、#{law(26, 1, 2, nil)}）"
 
     elsif (usege_in?(@building,[11, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31])) && (more_than_11th_floor_number(@building))
@@ -217,7 +217,7 @@ module BuildingsHelper
   end
 
   def law(article, paragraph, item, number)
-    if item == nil
+    if item.nil?
       "消防法施行令第#{article}条第#{paragraph}項"
     else
       "消防法施行令第#{article}条第#{paragraph}項第#{item}号#{number}"
