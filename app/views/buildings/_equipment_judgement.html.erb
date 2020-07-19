@@ -1,0 +1,42 @@
+<a class="btn-gradient-radius" href="" data-toggle="modal" data-target="#equipmentModal">消防用設備</a>
+<div class="modal fade" id="equipmentModal" tabindex="-1" role="dialog" aria-labelledby="equipmentModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="equipmentModalTitle">必要な消防用設備</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td><%= fire_extinguisher %></td>
+            </tr>
+            <tr>
+              <td><%= automatic_fire_alarm_equipment %></td>
+            </tr>
+            <tr>
+              <td><%= emergency_alarm_equipment %></td>
+            </tr>
+            <tr>
+              <td><%= evacuation_tool %></td>
+            </tr>
+            <tr>
+              <td><%= guide_light %></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>※少量危険物及び指定可燃物の貯蔵等の有無による消防用設備等の設置判定はしていません</p>
+        <p>※避難階及び避難階段等の設置の有無による消防用設備等の設置判定はしていません</p>
+        <% if @building.building_type_id == 2 %>
+          <p>※建物内の他の部分の使用状況によって必要な消防用設備が変わる場合があります。</p>
+        <% end %>
+        <div class="modal-footer">
+          <a class="btn-gradient-radius" data-dismiss="modal" href="">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

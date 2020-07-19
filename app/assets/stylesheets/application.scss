@@ -17,7 +17,7 @@ header {
   background-color: white;
 }
 .header {
-  border-top: 10px solid rgb(177, 173, 173);
+  border-top: 10px solid rgb(240, 240, 240);
 }
 .logo {
   margin: 0.5em auto;
@@ -40,6 +40,10 @@ header {
 .headerNavBtn:hover {
   background: #eee;
   text-decoration: none;
+}
+
+.headerNav {
+  border-bottom: 3px solid rgb(240, 240, 240);
 }
 
 // carousel部分
@@ -70,8 +74,7 @@ header {
   width: 100%;
 }
 
-// 中央section部分
-.section {
+中央section部分 .section {
   background: rgb(177, 173, 173);
   background: -moz-linear-gradient(
     50% 0% -90deg,
@@ -305,4 +308,10 @@ footer {
 
 #fire-use {
   display: none;
+}
+
+.str {
+  font-weight: bold;
+  font-size: 150%;
+  color: red;
 }
