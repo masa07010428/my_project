@@ -17,7 +17,7 @@ header {
   background-color: white;
 }
 .header {
-  border-top: 10px solid rgb(177, 173, 173);
+  border-top: 10px solid rgb(240, 240, 240);
 }
 .logo {
   margin: 0.5em auto;
@@ -28,7 +28,7 @@ header {
   margin: 0 auto;
 }
 
-.headerNavBtn {
+.header-nav-btn {
   text-align: center;
   height: 2em;
   line-height: 2em;
@@ -37,9 +37,13 @@ header {
   width: 50%;
 }
 
-.headerNavBtn:hover {
+.header-nav-btn:hover {
   background: #eee;
   text-decoration: none;
+}
+
+.header-nav {
+  border-bottom: 3px solid rgb(240, 240, 240);
 }
 
 // carousel部分
@@ -305,4 +309,10 @@ footer {
 
 #fire-use {
   display: none;
+}
+
+.str {
+  font-weight: bold;
+  font-size: 150%;
+  color: red;
 }

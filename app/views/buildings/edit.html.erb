@@ -4,7 +4,7 @@
   <div class="form-group">
     <%= f.label :name, "建物名称 / テナント名", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "建物名称/テナント名を入力してください" %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "例：古民家レストラン" %>
       <% if @building.errors.include?(:name) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:name).first %></p>
       <% end %>
@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "建物の住所を入力してください。入力すると周囲の消防署の情報を表示できます。"%>
+      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "例：東京都港区芝公園４−２−８" %>
       <% if @building.errors.include?(:address) %>
         <p class="error_message"><%= @building.errors.full_messages_for(:address).first %></p>
       <% end %>
@@ -42,9 +42,8 @@
 
   <div class="form-group radio-inline" id="fireUse">
     <div class="col-sm-8">
-      <%= f.label :fire_use_id, "火気使用設備の有無", class:"col-sm-3 control-label" %>
+      <%= f.label :fire_use_id, "ガスコンロ等の使用の有無", class:"col-sm-3 control-label" %>
       <%= f.collection_radio_buttons :fire_use_id, @fire_uses, :id, :fire_use_select, { checked: @fire_uses.second.id } %>
-      <p class="text-muted">※ガスコンロなどの設備がある場合は、有りを選択してください。</p>
     </div>
   </div>
 
@@ -55,7 +54,7 @@
 
   <div class="form-group">
     <%= f.label :entirety_floor, "階情報", class:"col-sm-1 control-label" %>
-    <%= link_to "※収容人員についてはこちらを参考にして階ごとに算出してください", "https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/jissen/syuyo_santei.pdf", target: :_blank %>
+    <%= render partial: "capacity" %>
     <div class="buildings col-sm-8">
       <%= f.fields_for :information_by_floors do |i| %>
         <%= render "information_by_floor_fields", f: i %>

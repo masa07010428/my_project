@@ -39,36 +39,7 @@
             <div class="col-md-6">
               <div id="gmap"></div>
               <hr>
-              <a class="js-modal-open btn-gradient-radius w-25 three-btn" href="" data-target="modal">消防用設備</a>
-              <div id="modal" class="modal js-modal">
-                <div class="modal_bg js-modal-close"></div>
-                <div class="modal_content">
-                  <h5>▶︎必要な消防用設備等</h5>
-                  <table class="table table-bordered table-striped">
-                    <tbody>
-                      <tr>
-                        <td><%= fire_extinguisher %></td>
-                      </tr>
-                      <tr>
-                        <%# <td><%= automatic_fire_alarm_equipment %></td> %>
-                      </tr>
-                      <tr>
-                        <%# <td><%= emergency_alarm_equipment %></td> %>
-                      </tr>
-                      <tr>
-                        <%# <td><%= evacuation_tool %></td> %>
-                      </tr>
-                      <tr>
-                        <%# <td><%= guide_light %></td> %>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p>※複合用途防火対象物の各階毎の消防用設備等の設置判定はしていません</p>
-                  <p>※少量危険物及び指定可燃物の貯蔵等の有無による消防用設備等の設置判定はしていません</p>
-                  <p>※避難階及び避難階段等の設置の有無による消防用設備等の設置判定はしていません</p>
-                  <a class="js-modal-close btn-gradient-radius" href="">Close</a>
-                </div>
-              </div>
+              <%= render partial: "equipment_judgement" %>
               <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius w-25 three-btn", 'data-turbolinks': :false %>
               <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius w-25 three-btn"%>
             </div>

@@ -10,7 +10,7 @@ function formChange() {
   const category = document.getElementById("building_entirety_usege_id").value;
   document.getElementById(
     "usageInfo"
-  ).innerHTML = `<p>※あなたが選択した用途は、『${category}』に該当します。収容人員算定の際に必要です。</p>`;
+  ).innerHTML = `<p>※あなたが選択した用途は、『<span class="str">${category}</span>』に該当します。収容人員算定の際に必要です。</p>`;
   if (["7", "8"].includes(category)) {
     document.getElementById("fireUse").style.display = "inline";
   } else {
