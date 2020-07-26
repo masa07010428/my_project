@@ -1,4 +1,5 @@
 class BuildingsController < ApplicationController
+  # before_action :authenticate_user, only: [:index, :new, :create, :edit, :show, :update, :destroy]
   before_action :set_up_building, only: [:show, :edit, :update, :destroy, :search, :map]
   before_action :set_up_form, only: [:new, :create, :edit, :update]
   # 一覧画面に対するアクション
@@ -73,6 +74,12 @@ class BuildingsController < ApplicationController
       :"information_by_floors.windowless_id"
     ]
   end
+
+  # def authenticate_user
+  #   if @current_user == current_user_id
+  #     redirect_to :user_session
+  #   end
+  # end
 
   # strong parameter
   def building_params

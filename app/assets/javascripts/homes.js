@@ -16,3 +16,13 @@ $(function () {
     return false;
   });
 });
+
+// slide in
+$(function () {
+  var slideIn = {
+    delay: 500,
+    distance: "200px",
+    origin: "bottom",
+  };
+  ScrollReveal().reveal(".scroll-reveal", slideIn);
+});
