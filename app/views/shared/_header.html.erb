@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 logo-position">
-          <%= link_to image_tag("logo2.png"), root_path, class: 'logo' %>
+          <%= link_to image_tag("logo2.png"), root_path, class: 'logo', 'data-turbolinks': :false %>
         </div>
       </div>
     </div>
@@ -12,14 +12,15 @@
     <div class="container">
       <div class="row header-nav-box">
         <% if user_signed_in? %>
-          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 header-nav-btn"%>
+          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
           <%= link_to "Building", new_building_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
           <%= link_to "Search", buildings_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
           <%= link_to "Log out", destroy_user_session_path, data: { confirm: "ログアウトしますか？" }, class: "col-xs-6 col-sm-3 header-nav-btn"%>
         <% else %>  
-          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-4 header-nav-btn"%>
-          <%= link_to "Introduction", homes_introduction_path, class: "col-xs-6 col-sm-4 header-nav-btn", 'data-turbolinks': :false %>
-          <%= link_to "Log in", new_user_session_path, class: "col-xs-6 col-sm-4 header-nav-btn"%>
+          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
+          <%= link_to "Introduction", homes_introduction_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
+          <%= link_to "Log in", new_user_session_path, class: "col-xs-6 col-sm-3 header-nav-btn"%>
+          <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "col-xs-6 col-sm-3 header-nav-btn" %>
         <% end %>
       </div>
     </div>
