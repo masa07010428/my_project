@@ -4,6 +4,7 @@ class Building < ApplicationRecord
   validates :entirety_usege_id, presence: { message: "を選択してください" }
   validates :building_type_id, presence: true
 
+  belongs_to :user
   belongs_to :entirety_usege, optional: :true
   belongs_to :building_type
   belongs_to :fire_use
