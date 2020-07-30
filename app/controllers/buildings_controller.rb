@@ -78,7 +78,7 @@ class BuildingsController < ApplicationController
 
   # アクセス制限
   def correct_user
-    if current_user.id != @building.user_id
+    if current_user != @building.user
     flash[:alert] = "別のユーザーの建物情報にはアクセスできません。"
     redirect_to root_path
     end
