@@ -8,19 +8,37 @@
       </div>
     </div>
   </div>
+  <div id="wrapper">
+    <p class="btn-gnavi">
+      <span></span>
+      <span></span>
+      <span></span>
+    </p>
+    <nav id="global-navi">
+      <ul class="menu" data-turbolinks="false">
+        <% if user_signed_in? %>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Edit user",  edit_user_registration_path %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, data: { confirm: "ログアウトしますか？" } %></li>
+        <% else%>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+          <li><%= link_to "Guest", users_guest_sign_in_path, method: :post %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
   <div class="header-nav">
     <div class="container">
-      <div class="row header-nav-box">
+      <div class="row header-nav-box" data-turbolinks="false">
         <% if user_signed_in? %>
-          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
-          <%= link_to "Building", new_building_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
-          <%= link_to "Search", buildings_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
-          <%= link_to "Log out", destroy_user_session_path, data: { confirm: "ログアウトしますか？" }, class: "col-xs-6 col-sm-3 header-nav-btn"%>
+          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-4 header-nav-btn" %>
+          <%= link_to "Building", new_building_path, class: "col-xs-6 col-sm-4 header-nav-btn" %>
+          <%= link_to "Search", buildings_path, class: "col-xs-6 col-sm-4 header-nav-btn" %>
         <% else %>  
-          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
-          <%= link_to "Introduction", homes_introduction_path, class: "col-xs-6 col-sm-3 header-nav-btn", 'data-turbolinks': :false %>
-          <%= link_to "Log in", new_user_session_path, class: "col-xs-6 col-sm-3 header-nav-btn"%>
-          <%= link_to "Guest", users_guest_sign_in_path, method: :post, class: "col-xs-6 col-sm-3 header-nav-btn" %>
+          <%= link_to "Home", root_path, class: "col-xs-6 col-sm-4 header-nav-btn" %>
+          <%= link_to "About", root_path( anchor: "about" ), class: "col-xs-6 col-sm-4 header-nav-btn" %>
+          <%= link_to "Introduction", homes_introduction_path, class: "col-xs-6 col-sm-4 header-nav-btn" %>
         <% end %>
       </div>
     </div>

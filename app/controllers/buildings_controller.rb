@@ -2,6 +2,7 @@ class BuildingsController < ApplicationController
   before_action :set_up_building, only: [:show, :edit, :update, :destroy]
   before_action :set_up_form, only: [:new, :create, :edit, :update]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # 一覧画面に対するアクション
   def index

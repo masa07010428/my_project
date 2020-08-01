@@ -1,4 +1,4 @@
-<%= link_to "一覧画面へ", buildings_path %>
+<%= link_to "一覧画面へ", buildings_path, 'data-turbolinks': :false %>
 <h1>建物情報入力</h1>
 <%= form_with model: @building, url: buildings_path, local: true do |f| %>
   <div class="form-group">

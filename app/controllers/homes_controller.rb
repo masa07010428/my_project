@@ -1,4 +1,5 @@
 class HomesController < ApplicationController
+  before_action :authenticate_user!, except: %i[index about introduction]
   def index; end
 
   def about; end
@@ -6,6 +7,4 @@ class HomesController < ApplicationController
   def introduction
     @equipments = Equipment.order(:id)
   end
-
-  def search; end
 end
