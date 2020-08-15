@@ -1,3 +1,4 @@
+<div class="container-building">
 <%= link_to "一覧画面へ", buildings_path, 'data-turbolinks': :false %>
 <h1>建物情報入力</h1>
 <%= form_with model: @building, url: buildings_path, local: true do |f| %>
@@ -48,14 +49,14 @@
   </div>
 
   <div class="form-group radio-inline">
-    <div class="col-sm-8" id="usageInfo">
+    <div class="col-sm-12" id="usageInfo">
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :entirety_floor, "階情報", class:"col-sm-1 control-label" %>
+    <%= f.label :entirety_floor, "階情報", class:"col-sm-2 control-label" %>
     <%= render partial: "capacity" %>
-    <div class="buildings col-sm-8">
+    <div class="buildings col-sm-12">
       <%= f.fields_for :information_by_floors do |i| %>
         <%= render "information_by_floor_fields", f: i %>
       <% end %>
@@ -67,7 +68,8 @@
 
   <%= f.hidden_field :user_id, value: current_user.id %>
 
-  <div class="col-sm-8 actions">
-    <%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
+  <div class="actions">
+    <%= f.submit ("登録"), class: 'btn btn-primary btn-block w-100' %>
   </div>
 <% end %>
+</div>

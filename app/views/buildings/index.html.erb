@@ -1,25 +1,26 @@
 <div class="show_section">
   <%= link_to "登録画面へ", new_building_path, 'data-turbolinks': :false %>
-  <div class="container">
   <%= will_paginate @buildings, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer%>
+  <div class="container-index">
     <div class="row">
       <% @buildings.each do |building| %>
-        <div class="card-link col-xs-12 col-sm-6 col-lg-3">
-          <%= link_to building_path(building), method: :get do %>
-            <div class="col_box clearfix">
-              <div class="col-xs-6 col-sm-12">
-                <img src="assets/building.png" alt="" class="img-responsive" style="width:100%;"/>
-              </div>
-              <div class="col-xs-6 col-sm-12">
-                <h4><%= building.name %></h4>
-                <p>住所：<%= building.address %></p>
-                <p>用途：<%= building.entirety_usege.category %></p>
-              </div>
+        <div class="col-sm-4 index-column">
+          <img src="assets/building.png" alt="" class="img-responsive mt-3" style="width:100%;"/>
+        </div>
+        <div class="col-sm-8 index-column">
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="mt-4"><%= building.name %></h3>
+              <p>住所：<%= building.address %></p>
+              <p>用途：<%= building.entirety_usege.category %></p>
             </div>
-          <% end %>
+            <div class="col-sm-4 ml-sm-auto mb-3">
+              <%= link_to "詳細", building_path(building), class: "btn-sticky", 'data-turbolinks': :false %></li>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
-  <%= will_paginate @buildings, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer%>
   </div>
+  <%= will_paginate @buildings, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer%>
 </div>

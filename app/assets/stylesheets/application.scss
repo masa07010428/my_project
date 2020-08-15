@@ -12,6 +12,9 @@
  * It is generally better to create a new file per style scope.
  */
 // 全体
+body {
+  font-family: "Roboto", sans-serif;
+}
 // header部分
 header {
   background-color: white;
@@ -19,14 +22,11 @@ header {
 .header {
   border-top: 10px solid rgb(245, 245, 245);
 }
-.logo {
-  margin: 0.5em auto;
-  display: block;
+.logo-position {
+  margin-left: 0;
+  z-index: 3;
 }
 
-.logo-position {
-  margin: 0 auto;
-}
 .header-nav-box a {
   text-decoration: none;
 }
@@ -70,70 +70,6 @@ header {
   border-bottom: 2px solid rgb(245, 245, 245);
 }
 
-// ハンバーガーメニュー
-#wrapper nav {
-  position: fixed;
-  top: 0;
-  right: -300px;
-  width: 300px;
-  height: 100%;
-  padding-top: 50px;
-  background: rgb(51, 51, 51);
-  font-size: 18px;
-  box-sizing: border-box;
-  z-index: 2;
-}
-#wrapper nav ul li {
-  display: block;
-  padding: 20px;
-}
-#wrapper nav ul li a {
-  text-decoration: none;
-  color: rgb(220, 220, 220);
-}
-#wrapper .btn-gnavi {
-  position: fixed;
-  top: 30px;
-  right: 20px;
-  width: 30px;
-  height: 24px;
-  z-index: 3;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-#wrapper .btn-gnavi span {
-  position: absolute;
-  width: 30px;
-  height: 4px;
-  background: rgb(100, 100, 100);
-  border-radius: 10px;
-}
-
-#wrapper .btn-gnavi span:nth-child(1) {
-  top: 0;
-}
-#wrapper .btn-gnavi span:nth-child(2) {
-  top: 10px;
-}
-#wrapper .btn-gnavi span:nth-child(3) {
-  top: 20px;
-}
-
-#wrapper .btn-gnavi.open span {
-  background: rgb(255, 255, 255);
-  width: 24px;
-}
-
-// carousel部分
-.mainVisual_wrapper .container {
-  padding: 0;
-}
-.mainVisual_wrapper.section {
-  padding: 0;
-  text-align: center;
-}
-
 .carousel-item .img-fluid-1 {
   width: 100%;
   height: 430px;
@@ -169,37 +105,7 @@ header {
 
 // 中央section部分
 .section {
-  // background: rgb(177, 173, 173);
-  // background: -moz-linear-gradient(
-  //   50% 0% -90deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
-  // background: -o-linear-gradient(
-  //   -90deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
-  // background: -webkit-gradient(
-  //   linear,
-  //   50% 0%,
-  //   50% 100%,
-  //   color-stop(0, rgb(236, 236, 236)),
-  //   color-stop(1, rgb(177, 173, 173))
-  // );
-  // background: -webkit-linear-gradient(
-  //   -90deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
-  // background: linear-gradient(
-  //   180deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
   padding: 2em 0 3em;
-  // -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff000000,endColorstr=#ff232829,GradientType=0)";
-  // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff000000,endColorstr=#ff232829,GradientType=0);
 }
 
 .top-card {
@@ -259,10 +165,10 @@ header {
 }
 
 .col_box {
-  padding: 15px 0 15px;
+  padding: 15px;
   margin-bottom: 1em;
   border-radius: 10px;
-  border: thin solid rgba(223, 1, 1, 1);
+  border: medium solid #ff4646;
 }
 
 .about {
@@ -325,6 +231,30 @@ footer {
   margin-left: 15px;
 }
 
+.introduction-card {
+  vertical-align: top;
+  margin: 10px 8px;
+  border-radius: 6px;
+  box-shadow: 0px 6px 8px #999;
+  position: relative;
+  display: inline-block;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.introduction-card img {
+  border-radius: 6px 6px 0 0;
+}
+.introduction-card:hover {
+  box-shadow: 0px 1px 2px #aaa;
+  opacity: 0.6;
+}
+
 // ログイン画面
 .login-wrapper {
   margin: 50px 50px 0 50px;
@@ -364,38 +294,38 @@ footer {
 .alert {
   margin-bottom: 0;
 }
+
+// 建物一覧page
+.container-index {
+  @extend .container-fluid;
+  max-width: 768px;
+  padding: 1rem;
+}
+.index-column {
+  border: thin solid rgb(109, 109, 109);
+}
+
+.btn-sticky {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #f7f7f7;
+  border-left: solid 6px #ff4646;
+  color: #ff4646;
+  font-weight: bold;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  width: 120px;
+  text-align: center;
+}
+.btn-sticky:active {
+  box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+  transform: translateY(2px);
+}
+
 // show page
 .show_section {
-  // background: rgb(99, 98, 98);
-  // background: -moz-linear-gradient(
-  //   50% 0% -90deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
-  // background: -o-linear-gradient(
-  //   -90deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
-  // background: -webkit-gradient(
-  //   linear,
-  //   50% 0%,
-  //   50% 100%,
-  //   color-stop(0, rgb(236, 236, 236)),
-  //   color-stop(1, rgb(177, 173, 173))
-  // );
-  // background: -webkit-linear-gradient(
-  //   -90deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
-  // background: linear-gradient(
-  //   180deg,
-  //   rgb(236, 236, 236) 0%,
-  //   rgb(177, 173, 173) 100%
-  // );
   padding: 2em 0 3em;
-  width: 100vw;
+  width: auto;
   height: 100vh;
 }
 
@@ -448,27 +378,13 @@ footer {
   object-fit: cover;
 }
 
-// introductionページ
-.introduction-card {
-  vertical-align: top;
-  margin: 10px 8px;
-  border-radius: 6px;
-  box-shadow: 0px 6px 8px #999;
-  position: relative;
-  display: inline-block;
-}
-
-.card-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.introduction-card img {
-  border-radius: 6px 6px 0 0;
-}
-.introduction-card:hover {
-  box-shadow: 0px 1px 2px #aaa;
-  opacity: 0.6;
+// 建物登録ページ
+.container-building {
+  @extend .container-fluid;
+  max-width: 800px;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: medium solid #ff4646;
+  border-radius: 10px;
 }
