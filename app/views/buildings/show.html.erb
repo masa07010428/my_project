@@ -39,9 +39,11 @@
             <div class="col-md-6">
               <div id="gmap"></div>
               <hr>
-              <%= render partial: "equipment_judgement" %>
-              <%= link_to "編集", edit_building_path(@building), class: "btn-gradient-radius w-25 three-btn", 'data-turbolinks': :false %>
-              <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-gradient-radius w-25 three-btn"%>
+              <div class="three-btn"> 
+                <%= render partial: "equipment_judgement" %>
+                <%= link_to "編集", edit_building_path(@building), class: "btn-sticky w-25 ml-4", 'data-turbolinks': :false %>
+                <%= link_to "削除", building_path(@building), method: :delete, data: { confirm: "削除しますか？" }, class: "btn-sticky w-25 ml-4"%>
+              </div>
             </div>
           </div>
         </div>

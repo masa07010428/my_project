@@ -1,73 +1,75 @@
-<%= link_to "一覧画面へ", buildings_path, 'data-turbolinks': :false %>
-<h1>建物情報入力</h1>
-<%= form_with model: @building, url: buildings_path, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name, "建物名称 / テナント名", class:"col-sm-3 control-label" %>
-    <div class="col-sm-8">
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "例：古民家レストラン" %>
-      <% if @building.errors.include?(:name) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:name).first %></p>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
-    <div class="col-sm-8">
-      <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "例：東京都港区芝公園４−２−８" %>
-      <% if @building.errors.include?(:address) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:address).first %></p>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :building_type_id, "建物タイプ", class:"col-sm-3 control-label" %><br>
-    <div class="col-sm-8">
-      <%= f.collection_radio_buttons :building_type_id, @building_types, :id, :b_type, { checked: @building_types.first.id } do |b| %>
-        <%= b.label {b.radio_button + b.text} %><br>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :entirety_usege_id, "用途", class:"col-sm-3 control-label"  %>
-    <div class="col-sm-8">
-      <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={ include_blank: "選択してください" }, html_options={ onchange: "formChange();" }) %>
-      <% if @building.errors.include?(:entirety_usege_id) %>
-        <p class="error_message"><%= @building.errors.full_messages_for(:entirety_usege_id).first %></p>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form-group radio-inline" id="fireUse">
-    <div class="col-sm-8">
-      <%= f.label :fire_use_id, "ガスコンロ等の使用の有無", class:"col-sm-3 control-label" %>
-      <%= f.collection_radio_buttons :fire_use_id, @fire_uses, :id, :fire_use_select, { checked: @fire_uses.second.id } %>
-    </div>
-  </div>
-
-  <div class="form-group radio-inline">
-    <div class="col-sm-8" id="usageInfo">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :entirety_floor, "階情報", class:"col-sm-1 control-label" %>
-    <%= render partial: "capacity" %>
-    <div class="buildings col-sm-8">
-      <%= f.fields_for :information_by_floors do |i| %>
-        <%= render "information_by_floor_fields", f: i %>
-      <% end %>
-      <div class="links">
-        <%= link_to_add_association '＋階情報を追加', f, :information_by_floors %>
+<div class="container-building">
+  <%= link_to "一覧画面へ", buildings_path, 'data-turbolinks': :false %>
+  <h1>建物情報入力</h1>
+  <%= form_with model: @building, url: buildings_path, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "建物名称 / テナント名", class:"col-sm-3 control-label" %>
+      <div class="col-sm-8">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: "例：古民家レストラン" %>
+        <% if @building.errors.include?(:name) %>
+          <p class="error_message"><%= @building.errors.full_messages_for(:name).first %></p>
+        <% end %>
       </div>
     </div>
-  </div>
 
-  <%= f.hidden_field :user_id, value: current_user.id %>
+    <div class="form-group">
+      <%= f.label :address, "住所", class:"col-sm-3 control-label" %>
+      <div class="col-sm-8">
+        <%= f.text_field :address, autofocus: true, autocomplete: "address", class: 'form-control', placeholder: "例：東京都港区芝公園４−２−８" %>
+        <% if @building.errors.include?(:address) %>
+          <p class="error_message"><%= @building.errors.full_messages_for(:address).first %></p>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="col-sm-8 actions">
-    <%= f.submit ("登録"), class: 'btn btn-primary btn-block' %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.label :building_type_id, "建物タイプ", class:"col-sm-3 control-label" %><br>
+      <div class="col-sm-8">
+        <%= f.collection_radio_buttons :building_type_id, @building_types, :id, :b_type, { checked: @building_types.first.id } do |b| %>
+          <%= b.label {b.radio_button + b.text} %><br>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :entirety_usege_id, "用途", class:"col-sm-3 control-label"  %>
+      <div class="col-sm-8">
+        <%= f.collection_select(:entirety_usege_id, @entirety_useges, :id, :view_category_and_example, option={ include_blank: "選択してください" }, html_options={ onchange: "formChange();" }) %>
+        <% if @building.errors.include?(:entirety_usege_id) %>
+          <p class="error_message"><%= @building.errors.full_messages_for(:entirety_usege_id).first %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group radio-inline" id="fireUse">
+      <div>
+        <%= f.label :fire_use_id, "ガスコンロ等の使用の有無", class: "col-sm-4 control-label" %>
+        <%= f.collection_radio_buttons :fire_use_id, @fire_uses, :id, :fire_use_select, { checked: @fire_uses.second.id } %>
+      </div>
+    </div>
+
+    <div class="form-group radio-inline">
+      <div id="usageInfo">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :entirety_floor, "階情報", class:"col-sm-2 control-label" %>
+      <%= render partial: "capacity" %>
+      <div class="buildings">
+        <%= f.fields_for :information_by_floors do |i| %>
+          <%= render "information_by_floor_fields", f: i %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association '＋階情報を追加', f, :information_by_floors %>
+        </div>
+      </div>
+    </div>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="actions">
+      <%= f.submit ("登録"), class: 'btn btn-primary btn-block w-100' %>
+    </div>
+  <% end %>
+</div>
